@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using PocketCloset.Views;
 using Xamarin.Forms.Xaml;
 
 namespace PocketCloset
@@ -10,7 +11,7 @@ namespace PocketCloset
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()
