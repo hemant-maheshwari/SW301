@@ -51,19 +51,5 @@ namespace PocketCloset.Views
         {
             App.Current.MainPage = new ForgotPasswordPage();
         }
-
-        //public bool checkInformation()  //verifies login information
-        //{
-        //    if (username == null || password == null)
-        //    {
-        //        return false;
-        //    }
-        //    if (!this.username.Equals("") && !this.password.Equals(""))
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //        return false;
-        //}
     }
 }

@@ -22,5 +22,15 @@ namespace PocketCloset.Views
         {
             BackgroundColor = Constants.backgroundColor;
         }
+
+        public void showFollowersPage(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new FollowersPage();
+        }
+
+        public void showFollowingPage(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new FollowingPage();
+        }
     }
 }
