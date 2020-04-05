@@ -21,8 +21,19 @@ namespace PocketCloset.Views
         void Init()
         {
             BackgroundColor = Constants.backgroundColor;
+            btnSignIn.TextColor = Constants.logoColor;
             Spinner.IsVisible = false;
 
+        }
+      
+        public void signUpButton(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
+        }
+
+        public void goToLoginPage(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
         }
     }
 }

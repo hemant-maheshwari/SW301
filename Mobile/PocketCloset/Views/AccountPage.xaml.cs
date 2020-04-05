@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PocketCloset.Models;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +16,14 @@ namespace PocketCloset.Views
         public AccountPage()
         {
             InitializeComponent();
+            Init();
+        }
+
+        void Init()
+        {
+            BackgroundColor = Constants.backgroundColor;
+            boxViewAccountPage.Color = Constants.logoColor;
+
         }
     }
 }
