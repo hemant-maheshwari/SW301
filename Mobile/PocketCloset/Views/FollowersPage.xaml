@@ -18,6 +18,7 @@
                             <ViewCell IsEnabled="False">
                                 <StackLayout Padding="1">
                                     <Label x:Name="lblFollowerName" Text="{Binding Name}" LineBreakMode="NoWrap" TextColor="White" FontSize="15"/>
+                                    <Button BorderColor="Transparent" BackgroundColor="Transparent" Text="Back to LogIn Page" TextColor="DarkGray" FontSize="12" Clicked="loginPageButton"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

@@ -15,6 +15,7 @@ namespace PocketCloset
     {
         public MainPage()
         {
+
             InitializeComponent();
         }
     }

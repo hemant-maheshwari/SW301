@@ -21,6 +21,10 @@ namespace PocketCloset.Views
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             boxViewFollowers.Color = Constants.logoColor;
         }
+        public void loginPageButton(object sender, EventArgs e)
+        {
+            App.Current.MainPage = new LoginPage();
+        }
 
     }
 }
