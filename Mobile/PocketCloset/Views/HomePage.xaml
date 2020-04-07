@@ -40,7 +40,7 @@
             <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
 
                
-
+            
             </StackLayout>
             <StackLayout x:Name="ProfilePicture" Orientation="Horizontal" Spacing="30" HorizontalOptions="Center">
                 <Image x:Name="ProfilePic" Aspect="AspectFit" Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
@@ -49,15 +49,15 @@
                     <Label x:Name="lblFollowersCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1"/>
                     <Label x:Name="lblFollowingCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2"/>
                     <Label x:Name="lblPosts" Text="Posts" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="12" Margin="0,8,0,0" Grid.Row="1" Grid.Column="0"/>
-                    <Button x:Name="btnFollowers" Text="Followers" TextColor="White" BackgroundColor="Transparent" FontSize="10" Grid.Row="1" Grid.Column="1" Margin="0,-15,0,0" Clicked="showFollowersPage"/>
-                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="10" Grid.Row="1" Grid.Column="2" Margin="0,-15,0,0" Clicked="showFollowingPage"/>
+                    <Button x:Name="btnFollowers" Text="Followers" TextColor="White" BackgroundColor="Transparent" FontSize="10" Grid.Row="1" Grid.Column="1" Margin="0,-15,0,0" Clicked="goToFollowersPage"/>
+                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="10" Grid.Row="1" Grid.Column="2" Margin="0,-15,0,0" Clicked="goToFollowingPage"/>
                 </Grid> 
             </StackLayout>
             <StackLayout Margin="40, 20, 0 ,0">
                 <Label x:Name="lblname" Text="Full Name" TextColor="White" FontAttributes="Bold"/>
             </StackLayout>
             <StackLayout>
-                <Button x:Name="btnEditProfile" Text="Edit Profile" Margin="30,0"/>
+                <Button x:Name="btnEditProfile" Text="Edit Profile" Margin="30,0" Clicked="goToAccountPage"/>
             </StackLayout>
             <StackLayout>
                 <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="40,30" ColumnSpacing="5" RowSpacing="15">

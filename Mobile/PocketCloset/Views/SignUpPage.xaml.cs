@@ -71,7 +71,14 @@ namespace PocketCloset.Views
                 DisplayAlert("Invalid Password Confirmation", "Passwords do not match. Try again.", "Okay");
                 entryConfirmPassword.Focus();
                 entryConfirmPassword.Text = "";
-            }else if (entryPhoneNumber.Text.Length < 10 || entryPhoneNumber.Text.Length > 11)
+            }
+            else if (entryPhoneNumber.Text == null || entryPhoneNumber.Text == "")
+            {
+                DisplayAlert("Invalid Phone Number", "Please enter a phone number.", "Okay");
+                entryPhoneNumber.Focus();
+
+            }
+            else if (entryPhoneNumber.Text.Length < 10 || entryPhoneNumber.Text.Length > 11)
             {
                 DisplayAlert("Invalid Phone Number", "Invalid phone number. Try again", "Okay");
                 entryPhoneNumber.Focus();
