@@ -18,12 +18,14 @@
                             <ViewCell IsEnabled="False">
                                 <StackLayout Padding="1">
                                     <Label x:Name="lblFollowingName" Text="{Binding Name}" LineBreakMode="NoWrap" TextColor="White" FontSize="15"/>
-                                    <Button BorderColor="Transparent" BackgroundColor="Transparent" Text="Back to LogIn Page" TextColor="DarkGray" FontSize="12" Clicked="loginPageButton"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <StackLayout Padding="1">
+                    <Button BackgroundColor="DarkGray" Text="Back to Home Page" TextColor="White" FontSize="12" Clicked="goToHomePage"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -17,7 +17,8 @@
             <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
         </OnIdiom>
     </StackLayout.Padding>
-    <!--Pages can be added as references or inline-->
+    
+ <!--beginning of Home Page-->
 
     <ContentPage Title="Home " IconImageSource="homeIcon.png">
 
@@ -80,53 +81,105 @@
                                HeightRequest="275"
                                WidthRequest="300"
                                VerticalOptions="CenterAndExpand"
-                               Elevation="1">
+                               Elevation="1"
+                                   Margin="0,0,0,50">
+                    
                     <Image Source="user3profile.png"/>
                 </yummy:PancakeView>
-                <BoxView x:Name="boxViewPostDivider3" HorizontalOptions="FillAndExpand" HeightRequest="1" />
+
 
             </StackLayout>
      </ScrollView>
     </ContentPage>  
+<!--End of Home Page-->
     
-    
-
+<!--beginning of search page-->
     <ContentPage Title="Search " IconImageSource="searchIcon.png">
         <StackLayout>
-            <SearchBar Placeholder="Search..."  BackgroundColor="LightSlateGray"></SearchBar>
-            <ListView x:Name="listView">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell Text="food"></TextCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <SearchBar x:Name="searchPageBar" Placeholder="Search..."  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
+            <ListView x:Name="searchPageList"/>
         </StackLayout>
 
     </ContentPage>
+<!--end of search page-->
 
-
-
+<!--beginning of create outfit page-->
     <ContentPage Title="Create Outfit " IconImageSource="createOutfitIcon.png">
-        
-           
-        
-        
-
-
-
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Image Source="LoginIcon.png" HeightRequest="60"  Margin="-5,-5,0,0" Grid.Row="0" Grid.Column="0"/>
+                <Label Text="Create An Outfit"  Margin="30,0,0,0" FontAttributes="Bold" FontSize="35" TextColor="White" FontFamily="MS Gothic"/>
+            </StackLayout>
+            
+            <StackLayout x:Name="Welcome" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
+                <BoxView Color="DarkOrange" WidthRequest ="200" HeightRequest="2"/>
+            </StackLayout>
+            
+            <StackLayout Orientation="Vertical">
+                
+            <StackLayout Orientation="Horizontal">
+                    <StackLayout>
+            <yummy:PancakeView CornerRadius="60"
+                               BorderThickness="2"
+                               HasShadow="True"
+                               HeightRequest="300"
+                               WidthRequest="350"
+                                Elevation="1">
+                <Image Source="user1profile.png" />
+            </yummy:PancakeView>
+                    </StackLayout>
+                
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout>
+                        <ImageButton Source ="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
+                        <Label Text="Add Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000"/>
+                            <Label Text="Save Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+                        </StackLayout>
+                    </StackLayout>
+                
+            </StackLayout>
+                
+            <StackLayout Orientation="Horizontal">
+                    <StackLayout>
+                        <yummy:PancakeView CornerRadius="60"
+                               BorderThickness="2"
+                               HasShadow="True"
+                               HeightRequest="300"
+                               WidthRequest="350"
+                               Elevation="1">
+                            <Image Source="user1profile.png"/>
+                        </yummy:PancakeView>
+                    </StackLayout>
+                
+                    <StackLayout Orientation="Vertical">
+                        <StackLayout>
+                    <ImageButton Source="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
+                        <Label Text="Add Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+                        </StackLayout>
+                        <StackLayout>
+                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000" Clicked="goToFollowersPage"/>
+                            <Label Text="Save Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                
+            </StackLayout>
+        </StackLayout>
 
     </ContentPage>
+<!--end of create outfit page-->
 
-
-
-<ContentPage Title="Profile" IconImageSource="profileIcon.png">
+<!--beginning of profile page-->
+    <ContentPage Title="Profile" IconImageSource="profileIcon.png">
         <StackLayout x:Name="MasterLayout">
             <Label x:Name="lblUsername" Text="Username" HorizontalTextAlignment="Center" Margin="0,15,0,0" FontSize="25" TextColor="White"/>
             <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
 
-               
-            
+
+
             </StackLayout>
             <StackLayout x:Name="ProfilePicture" Orientation="Horizontal" Spacing="30" HorizontalOptions="Center">
                 <Image x:Name="ProfilePic" Aspect="AspectFit" Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
@@ -137,7 +190,7 @@
                     <Label x:Name="lblPosts" Text="POSTS" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="Caption" Margin="0,15,0,0" Grid.Row="1" Grid.Column="0"/>
                     <Button x:Name="btnFollowers" Text="Followers" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="1" Margin="-35,0,0,30" Clicked="goToFollowersPage"/>
                     <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="2" Margin="-35,0,0,30" Clicked="goToFollowingPage"/>
-                </Grid> 
+                </Grid>
             </StackLayout>
             <StackLayout Margin="40, -10, 0 ,0">
                 <Label x:Name="lblname" Text="Full Name" TextColor="White" FontAttributes="Bold"/>
@@ -159,8 +212,10 @@
             </StackLayout>
         </StackLayout>
     </ContentPage>
-
-
+    <!--end of profile page-->
+    
+    
+    <!--beginning of settings page-->
     <ContentPage Title="Settings" IconImageSource="settingsIcon.png">
         <StackLayout>
             <StackLayout Orientation="Horizontal">
@@ -186,4 +241,6 @@
 
 
     </ContentPage>
+    <!--end of settings page-->
+    
 </TabbedPage>

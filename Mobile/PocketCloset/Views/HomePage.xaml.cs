@@ -15,16 +15,30 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : TabbedPage
     {
+        private readonly List<string> searches = new List<string>
+        {
+           "Aaron", "Banson", "Hemant", "Logan", "Kyle"
+        };
+        public void searchButtonPressed(object sender, EventArgs e)
+        {
+            string keyword = searchPageBar.Text;
+            IEnumerable<string> searchResults = searches.Where(name => name.Contains(keyword));
+            searchPageList.ItemsSource = searchResults;
+        }
+        
         public HomePage()
         {
             Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
             InitializeComponent();
             Init();
+            searchPageList.ItemsSource = searches;
         }
         public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
             boxViewPostDivider.Color = Constants.logoColor;
+           
+            boxViewPostDivider2.Color = Constants.logoColor;
 
         }
         protected override void OnAppearing()
@@ -55,5 +69,6 @@ namespace PocketCloset.Views
         {
             App.Current.MainPage = new AccountPage();
         }
+      
     }
 }
