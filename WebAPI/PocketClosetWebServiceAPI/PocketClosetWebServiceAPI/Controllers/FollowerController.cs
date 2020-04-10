@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
+using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -16,14 +18,27 @@ namespace PocketClosetWebServiceAPI.Controllers
         public FollowerController(IConfiguration config) {
             this.config = config;
         }
-        public JsonResult createFollower(Follower follower)
+
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createFollower([FromBody] Follower follower)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            FollowerDataHandler followerDataHandler = new FollowerDataHandler(config);
+            followerDataHandler.followedUserId = follower.followedUserId;
+            followerDataHandler.followerUserId = follower.followerUserId;
+            response.status = followerDataHandler.createFollower();
+            return Json(response);
         }
 
+        [Route("delete/{followId}")]
+        [HttpGet]
         public JsonResult deleteFollower(int followId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            FollowerDataHandler followerDataHandler = new FollowerDataHandler(config);
+            response.status = followerDataHandler.deleteFollower(followId);
+            return Json(response);
         }
 
         public IActionResult Index()

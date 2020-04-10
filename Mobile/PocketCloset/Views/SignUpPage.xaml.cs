@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Text.RegularExpressions;
+using PocketCloset.Controller;
 
 namespace PocketCloset.Views
 {
@@ -86,6 +87,7 @@ namespace PocketCloset.Views
             }
             else
             {
+                //UserController userController = new UserController();
                 App.Current.MainPage = new HomePage();
             }
         }

@@ -1,11 +1,15 @@
-﻿using System;
+﻿using PocketCloset.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PocketClosetWebServiceAPI.Handlers
 {
-    interface IUserDataHandler
+    public interface IUserDataHandler
     {
+        bool createUser();
+        bool updateUser();
+        User getUser(int userId);
     }
 }

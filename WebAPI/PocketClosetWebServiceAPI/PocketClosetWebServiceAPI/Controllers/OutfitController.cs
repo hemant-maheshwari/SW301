@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
+using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -15,24 +18,36 @@ namespace PocketClosetWebServiceAPI.Controllers
         public OutfitController(IConfiguration config) {
             this.config = config;
         }
-        public JsonResult createOutfit(Outfit outfit)
+
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createOutfit([FromBody] Outfit outfit)
         {
-            throw new NotImplementedException();
+            return saveOutfit(outfit, "create");
         }
 
+        [Route("delete/{outfitId}")]
+        [HttpGet]
         public JsonResult deleteOutfit(int outfitId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            OutfitDataHandler outfitDataHandler = new OutfitDataHandler(config);
+            response.status = outfitDataHandler.deleteOutfit(outfitId);
+            return Json(response);
         }
 
+        [Route("getAll/{userId}")]
+        [HttpGet]
         public JsonResult getAllOutfits(int userId)
         {
-            throw new NotImplementedException();
+            return findOutfits(userId, "getAll");
         }
 
+        [Route("get/{outfitId}")]
+        [HttpGet]
         public JsonResult getOutfit(int outfitId)
         {
-            throw new NotImplementedException();
+            return findOutfits(outfitId, "get");
         }
 
         public IActionResult Index()
@@ -40,9 +55,49 @@ namespace PocketClosetWebServiceAPI.Controllers
             return View();
         }
 
-        public JsonResult updateOutfit(Outfit outfit)
+        [Route("update")]
+        [HttpPost]
+        public JsonResult updateOutfit([FromBody] Outfit outfit)
         {
-            throw new NotImplementedException();
+            return saveOutfit(outfit, "update");
+        }
+
+        private JsonResult saveOutfit(Outfit outfit, string command) {
+            Response response = new Response();
+            OutfitDataHandler outfitDataHandler = new OutfitDataHandler(config);
+            outfitDataHandler.outfitId = outfit.outfitId;
+            outfitDataHandler.outfitId = outfit.outfitId;
+            outfitDataHandler.outfitId = outfit.outfitId;
+            outfitDataHandler.outfitId = outfit.outfitId;
+            if (command.Equals("create")) {
+                response.status = outfitDataHandler.createOutfit();
+            }
+            if (command.Equals("update")) {
+                response.status = outfitDataHandler.updateOutfit();
+            }
+            return Json(response);            
+        }
+
+        private JsonResult findOutfits(int searchId, string command) {
+            Response response = new Response();
+            try {
+                OutfitDataHandler outfitDataHandler = new OutfitDataHandler(config);
+                response.status = true;
+                if (command.Equals("get"))
+                {
+                    Outfit outfit = outfitDataHandler.getOutfit(searchId);
+                    response.data = JsonConvert.SerializeObject(outfit);
+                }
+                if (command.Equals("getAll"))
+                {
+                    List<Outfit> outfits = outfitDataHandler.getAllOutfits(searchId);
+                    response.data = JsonConvert.SerializeObject(outfits);
+                }
+            } catch (Exception ex) {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);            
         }
     }
 }

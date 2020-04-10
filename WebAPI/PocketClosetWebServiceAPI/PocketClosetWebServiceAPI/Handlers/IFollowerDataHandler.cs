@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace PocketClosetWebServiceAPI.Handlers
 {
-    interface IFollowerDataHandler
+    public interface IFollowerDataHandler
     {
+        bool createFollower();
+        bool deleteFollower(int followId);
     }
 }

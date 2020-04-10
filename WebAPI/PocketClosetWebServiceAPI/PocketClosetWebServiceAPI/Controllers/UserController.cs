@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
 using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
@@ -18,14 +20,28 @@ namespace PocketClosetWebServiceAPI.Controllers
             this.config = config;
         }
 
-        public JsonResult createUser(User user)
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createUser([FromBody] User user)
         {
-            throw new NotImplementedException();
+            return saveuser(user, "create");
         }
 
+        [Route("get/{userId}")]
+        [HttpGet]
         public JsonResult getUser(int userId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            UserDataHandler userDataHandler = new UserDataHandler(config);
+            try {
+                User user = userDataHandler.getUser(userId);
+                response.status = true;
+                response.data = JsonConvert.SerializeObject(user);
+            } catch (Exception ex) {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
 
         public IActionResult Index()
@@ -33,17 +49,32 @@ namespace PocketClosetWebServiceAPI.Controllers
             return View();
         }
 
-        [HttpGet]
-        [Route("testGet")]
-        public JsonResult testGet() {
-            Response response = new Response();
-            response.message = "success!!!";
-            return Json(response);
+        [Route("update")]
+        [HttpPost]
+        public JsonResult updateUser([FromBody] User user)
+        {
+            return saveuser(user, "update");
         }
 
-        public JsonResult updateUser(User user)
-        {
-            throw new NotImplementedException();
+        private JsonResult saveuser(User user, string command) {
+            Response response = new Response();
+            UserDataHandler userDataHandler = new UserDataHandler(config);
+            userDataHandler.userId = user.userId;
+            userDataHandler.username = user.username;
+            userDataHandler.password = user.password;
+            userDataHandler.firstName = user.firstName;
+            userDataHandler.lastName = user.lastName;
+            userDataHandler.email = user.email;
+            userDataHandler.userType = user.userType;
+            userDataHandler.gender = user.gender;
+            userDataHandler.dob = user.dob;
+            if (command.Equals("create")) {
+                response.status = userDataHandler.createUser();
+            }
+            if (command.Equals("update")) {
+                response.status = userDataHandler.updateUser();
+            }
+            return Json(response);
         }
     }
 }

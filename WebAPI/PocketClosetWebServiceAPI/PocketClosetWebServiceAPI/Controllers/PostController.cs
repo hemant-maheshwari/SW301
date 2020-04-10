@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
+using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -15,24 +18,60 @@ namespace PocketClosetWebServiceAPI.Controllers
         public PostController(IConfiguration config) {
             this.config = config;
         }
-        public JsonResult createPost(Post post)
+
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createPost([FromBody] Post post)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            PostDataHandler postDataHandler = new PostDataHandler(config);
+            postDataHandler.clothId = post.clothId;
+            postDataHandler.userId = post.userId;
+            postDataHandler.isModelPresent = post.isModelPresent;
+            postDataHandler.postId = post.postId;
+            postDataHandler.price = post.price;
+            postDataHandler.url = post.url;
+            response.status = postDataHandler.createPost();
+            return Json(response);
         }
 
+        [Route("getAll/{userId}")]
+        [HttpGet]
         public JsonResult getAllPosts(int userId)
         {
-            throw new NotImplementedException();
+            return findPosts(userId, "getAll");
         }
 
+        [Route("get/{postId}")]
+        [HttpGet]
         public JsonResult getPost(int postId)
         {
-            throw new NotImplementedException();
+            return findPosts(postId, "get");
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        private JsonResult findPosts(int searchId, string command) {
+            Response response = new Response();
+            PostDataHandler postDataHandler = new PostDataHandler(config);
+            try {
+                if (command.Equals("get")) {
+                    Post post = postDataHandler.getPost(searchId);
+                    response.data = JsonConvert.SerializeObject(post);
+                }
+                if (command.Equals("getAll")) {
+                    List<Post> posts = postDataHandler.getAllPosts(searchId);
+                    response.data = JsonConvert.SerializeObject(posts);
+                }
+                response.status = true;
+            } catch (Exception ex) {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
     }
 }

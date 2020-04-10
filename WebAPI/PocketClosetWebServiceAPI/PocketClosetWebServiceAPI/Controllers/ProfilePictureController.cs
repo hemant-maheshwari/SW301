@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
+using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -15,19 +18,42 @@ namespace PocketClosetWebServiceAPI.Controllers
         public ProfilePictureController(IConfiguration config) {
             this.config = config;
         }
-        public JsonResult createProfilePicture(ProfilePicture profilePicture)
+
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createProfilePicture([FromBody] ProfilePicture profilePicture)
         {
-            throw new NotImplementedException();
+            return saveProfilePicture(profilePicture, "create");
         }
 
+        [Route("delete/{userId}")]
+        [HttpGet]
         public JsonResult deleteProfilePicture(int userId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ProfilePictureDataHandler profilePictureDataHandler = new ProfilePictureDataHandler(config);
+            response.status = profilePictureDataHandler.deleteProfilePicture(userId);
+            return Json(response);
         }
 
+        [Route("get/{userId}")]
+        [HttpGet]
         public JsonResult getProfilePicture(int userId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            ProfilePictureDataHandler profilePictureDataHandler = new ProfilePictureDataHandler(config);
+            try
+            {
+                ProfilePicture profilePicture = profilePictureDataHandler.getProfilePicture(userId);
+                response.data = JsonConvert.SerializeObject(profilePicture);
+                response.status = true;
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
 
         public IActionResult Index()
@@ -35,9 +61,27 @@ namespace PocketClosetWebServiceAPI.Controllers
             return View();
         }
 
-        public JsonResult updateProfilePicture(ProfilePicture profilePicture)
+        [Route("update")]
+        [HttpPost]
+        public JsonResult updateProfilePicture([FromBody] ProfilePicture profilePicture)
         {
-            throw new NotImplementedException();
+            return saveProfilePicture(profilePicture, "create");
+        }
+
+        private JsonResult saveProfilePicture(ProfilePicture profilePicture, string command) {
+            Response response = new Response();
+            ProfilePictureDataHandler profilePictureDataHandler = new ProfilePictureDataHandler(config);
+            profilePictureDataHandler.userId = profilePicture.userId;
+            profilePictureDataHandler.profilePicture = profilePicture.profilePicture;
+            if (command.Equals("create"))
+            {
+                response.status = profilePictureDataHandler.createProfilePicture();
+            }
+            if (command.Equals("update"))
+            {
+                response.status = profilePictureDataHandler.updateProfilePicture();
+            }
+            return Json(response);
         }
     }
 }

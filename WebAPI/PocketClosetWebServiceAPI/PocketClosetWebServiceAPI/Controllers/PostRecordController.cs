@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.Handlers;
+using PocketClosetWebServiceAPI.Models;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -15,19 +18,47 @@ namespace PocketClosetWebServiceAPI.Controllers
         public PostRecordController(IConfiguration config) {
             this.config = config;
         }
-        public JsonResult createPostRecord(PostRecord postRecord)
+
+        [Route("create")]
+        [HttpPost]
+        public JsonResult createPostRecord([FromBody] PostRecord postRecord)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            PostRecordDataHandler postRecordDataHandler = new PostRecordDataHandler(config);
+            postRecordDataHandler.postId = postRecord.postId;
+            postRecordDataHandler.postRecordId = postRecord.postRecordId;
+            postRecordDataHandler.userId = postRecord.userId;
+            postRecordDataHandler.datePosted = postRecord.datePosted;
+            response.status = postRecordDataHandler.createPostRecord();
+            return Json(response);
         }
 
+        [Route("delete/{postRecordId}")]
+        [HttpGet]
         public JsonResult deletePostRecord(int postRecordId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            PostRecordDataHandler postRecordDataHandler = new PostRecordDataHandler(config);
+            response.status = postRecordDataHandler.deletePostRecord(postRecordId);
+            return Json(response);
         }
 
+        [Route("getAll/{userId}")]
+        [HttpGet]
         public JsonResult getAllPostRecords(int userId)
         {
-            throw new NotImplementedException();
+            Response response = new Response();
+            PostRecordDataHandler postRecordDataHandler = new PostRecordDataHandler(config);
+            try {
+                List<PostRecord> postRecords = postRecordDataHandler.getAllPostRecords(userId);
+                response.data = JsonConvert.SerializeObject(postRecords);
+                response.status = true;
+            }
+            catch (Exception ex) {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
 
         public IActionResult Index()
