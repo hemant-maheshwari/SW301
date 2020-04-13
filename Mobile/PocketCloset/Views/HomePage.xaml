@@ -1,246 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="PocketCloset.Views.HomePage"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ffTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             android:TabbedPage.ToolbarPlacement="Bottom" BarBackgroundColor="LightSteelBlue" >
-
-    <StackLayout.Padding>
-        <OnIdiom x:TypeArguments="Thickness" >
-            <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
-            <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
-        </OnIdiom>
-    </StackLayout.Padding>
-    
- <!--beginning of Home Page-->
-
-    <ContentPage Title="Home " IconImageSource="homeIcon.png">
-
-        <ScrollView VerticalScrollBarVisibility="Never">
-            <StackLayout>
-
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal">
-                    <ff:CachedImage Source="user1profile.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
-                        <ff:CachedImage.Transformations>
-                            <ffTrans:CircleTransformation />
-                        </ff:CachedImage.Transformations>
-                    </ff:CachedImage>
-                    <Label Text="User1" VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
-                </StackLayout>
-
-                <yummy:PancakeView CornerRadius="20"
-                               HasShadow="True"
-                               HeightRequest="275"
-                               WidthRequest="350"
-                               VerticalOptions="CenterAndExpand"
-                               Elevation="1">
-                    <Image Source="user1profile.png"/>
-                </yummy:PancakeView>
-                <BoxView x:Name="boxViewPostDivider" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                
-                
-
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal">
-                    <ff:CachedImage Source="user2profile.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
-                        <ff:CachedImage.Transformations>
-                            <ffTrans:CircleTransformation />
-                        </ff:CachedImage.Transformations>
-                    </ff:CachedImage>
-                    <Label Text="User1" VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
-                </StackLayout>
-
-                <yummy:PancakeView CornerRadius="20"
-                               HasShadow="True"
-                               HeightRequest="275"
-                               WidthRequest="300"
-                               VerticalOptions="CenterAndExpand"
-                               Elevation="1">
-                    <Image Source="user2profile.png"/>
-                </yummy:PancakeView>
-                <BoxView x:Name="boxViewPostDivider2" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                
-                
-
-                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal">
-                    <ff:CachedImage Source="user3profile.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
-                        <ff:CachedImage.Transformations>
-                            <ffTrans:CircleTransformation />
-                        </ff:CachedImage.Transformations>
-                    </ff:CachedImage>
-                    <Label Text="User1" VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
-                </StackLayout>
- 
-                <yummy:PancakeView CornerRadius="20"
-                               HasShadow="True"
-                               HeightRequest="275"
-                               WidthRequest="300"
-                               VerticalOptions="CenterAndExpand"
-                               Elevation="1"
-                                   Margin="0,0,0,50">
-                    
-                    <Image Source="user3profile.png"/>
-                </yummy:PancakeView>
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             x:Class="PocketCloset.Views.HomePage"
+             NavigationPage.HasNavigationBar="False">
 
 
-            </StackLayout>
-     </ScrollView>
-    </ContentPage>  
-<!--End of Home Page-->
-    
-<!--beginning of search page-->
-    <ContentPage Title="Search " IconImageSource="searchIcon.png">
-        <StackLayout>
-            <SearchBar x:Name="searchPageBar" Placeholder="Search..."  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
-            <ListView x:Name="searchPageList"/>
-        </StackLayout>
 
-    </ContentPage>
-<!--end of search page-->
+    <ContentPage.Content>
 
-<!--beginning of create outfit page-->
-    <ContentPage Title="Create Outfit " IconImageSource="createOutfitIcon.png">
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Source="LoginIcon.png" HeightRequest="60"  Margin="-5,-5,0,0" Grid.Row="0" Grid.Column="0"/>
-                <Label Text="Create An Outfit"  Margin="30,0,0,0" FontAttributes="Bold" FontSize="35" TextColor="White" FontFamily="MS Gothic"/>
-            </StackLayout>
-            
-            <StackLayout x:Name="Welcome" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
-                <BoxView Color="DarkOrange" WidthRequest ="200" HeightRequest="2"/>
-            </StackLayout>
-            
-            <StackLayout Orientation="Vertical">
-                
-            <StackLayout Orientation="Horizontal">
-                    <StackLayout>
-            <yummy:PancakeView CornerRadius="60"
-                               BorderThickness="2"
-                               HasShadow="True"
-                               HeightRequest="300"
-                               WidthRequest="350"
-                                Elevation="1">
-                <Image Source="user1profile.png" />
-            </yummy:PancakeView>
-                    </StackLayout>
-                
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout>
-                        <ImageButton Source ="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
-                        <Label Text="Add Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+        <StackLayout x:Name="mainPage">
+
+            <ScrollView VerticalScrollBarVisibility="Never">
+
+                <StackLayout x:Name="feedLayout" IsVisible="True">
+
+                    <StackLayout Orientation="Vertical" >
+
+                        <StackLayout.Padding>
+                            <OnIdiom x:TypeArguments="Thickness" >
+                                <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                                <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
+                            </OnIdiom>
+                        </StackLayout.Padding>
+
+                        <StackLayout Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Orientation="Horizontal">
+
+                            <ff:CachedImage Source="user1profile.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
+                                <ff:CachedImage.Transformations>
+                                    <ffTrans:CircleTransformation />
+                                </ff:CachedImage.Transformations>
+                            </ff:CachedImage>
+                            <Label Text="user1" VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
                         </StackLayout>
-                        <StackLayout>
-                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000"/>
-                            <Label Text="Save Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
-                        </StackLayout>
-                    </StackLayout>
-                
-            </StackLayout>
-                
-            <StackLayout Orientation="Horizontal">
-                    <StackLayout>
-                        <yummy:PancakeView CornerRadius="60"
-                               BorderThickness="2"
+
+                        <yummy:PancakeView CornerRadius="20"
                                HasShadow="True"
-                               HeightRequest="300"
+                               HeightRequest="275"
                                WidthRequest="350"
+                               VerticalOptions="CenterAndExpand"
                                Elevation="1">
                             <Image Source="user1profile.png"/>
                         </yummy:PancakeView>
-                    </StackLayout>
-                
-                    <StackLayout Orientation="Vertical">
-                        <StackLayout>
-                    <ImageButton Source="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
-                        <Label Text="Add Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
-                        </StackLayout>
-                        <StackLayout>
-                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000" Clicked="goToFollowersPage"/>
-                            <Label Text="Save Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
-                        </StackLayout>
+                        <BoxView x:Name="boxViewPostDivider" HorizontalOptions="FillAndExpand" HeightRequest="1" />
                     </StackLayout>
                 </StackLayout>
-                
-            </StackLayout>
-        </StackLayout>
 
-    </ContentPage>
-<!--end of create outfit page-->
-
-<!--beginning of profile page-->
-    <ContentPage Title="Profile" IconImageSource="profileIcon.png">
-        <StackLayout x:Name="MasterLayout">
-            <Label x:Name="lblUsername" Text="Username" HorizontalTextAlignment="Center" Margin="0,15,0,0" FontSize="25" TextColor="White"/>
-            <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+            </ScrollView>
+            <Button x:Name="addPost" BorderColor="Black" BackgroundColor="LightGray" Text="AddPost" FontSize="12" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,10,0"/>
 
 
-
-            </StackLayout>
-            <StackLayout x:Name="ProfilePicture" Orientation="Horizontal" Spacing="30" HorizontalOptions="Center">
-                <Image x:Name="ProfilePic" Aspect="AspectFit" Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
-                <Grid ColumnSpacing="20">
-                    <Label x:Name="lblPostsCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="lblFollowersCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label x:Name="lblFollowingCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2"/>
-                    <Label x:Name="lblPosts" Text="POSTS" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="Caption" Margin="0,15,0,0" Grid.Row="1" Grid.Column="0"/>
-                    <Button x:Name="btnFollowers" Text="Followers" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="1" Margin="-35,0,0,30" Clicked="goToFollowersPage"/>
-                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="2" Margin="-35,0,0,30" Clicked="goToFollowingPage"/>
-                </Grid>
-            </StackLayout>
-            <StackLayout Margin="40, -10, 0 ,0">
-                <Label x:Name="lblname" Text="Full Name" TextColor="White" FontAttributes="Bold"/>
-            </StackLayout>
-            <StackLayout>
-                <Button x:Name="btnEditProfile" Text="Edit Profile" Margin="30,0" Clicked="goToAccountPage"/>
-            </StackLayout>
-            <StackLayout>
-                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="40,30" ColumnSpacing="5" RowSpacing="15">
-                    <Image x:Name="Pic1" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="0"/>
-                    <Image x:Name="Pic2" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="1"/>
-                    <Image x:Name="Pic3" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="2"/>
-                    <Image x:Name="Pic4" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="0"/>
-                    <Image x:Name="Pic5" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="1"/>
-                    <Image x:Name="Pic6" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="2"/>
-                    <Image x:Name="Pic7" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="0"/>
-                    <Image x:Name="Pic8" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="1"/>
-                </Grid>
-            </StackLayout>
-        </StackLayout>
-    </ContentPage>
-    <!--end of profile page-->
-    
-    
-    <!--beginning of settings page-->
-    <ContentPage Title="Settings" IconImageSource="settingsIcon.png">
-        <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Source="LoginIcon.png" HeightRequest="60"  Margin="-5,-5,0,0" Grid.Row="0" Grid.Column="0"/>
-                <Label Text="Settings"  Margin="40,0,0,0" FontAttributes="Bold" FontSize="40" TextColor="White" FontFamily="MS Gothic"/>
-            </StackLayout>
-            <StackLayout x:Name="Welcome4" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
-                <BoxView Color="DarkOrange" WidthRequest ="200" HeightRequest="2"/>
-                <Label Text="Edit your account information" TextColor="White" FontSize="15" />
-            </StackLayout>
-            <StackLayout Margin="0,30,0,0">
-                <Entry x:Name="entryAccFirstName" Placeholder="First Name" TextColor="White" PlaceholderColor="LightGray"/>
-                <Entry x:Name="entryAccLastName" Placeholder="Last Name" TextColor="White" PlaceholderColor="LightGray"/>
-                <Entry x:Name="entryAccEmail" Placeholder="Email" TextColor="White" PlaceholderColor="LightGray" Keyboard="Email"/>
-                <Entry x:Name="entryAccPhone" Placeholder="Phone" TextColor="White" PlaceholderColor="LightGray" Keyboard="Telephone"/>
-                <Entry x:Name="entryAccPassword" Placeholder="Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
-            </StackLayout>
-            <StackLayout Margin="0,40">
-                <Button x:Name="btnUpdateAccInfo" CornerRadius="5" BackgroundColor="DarkGray" Text="Update Information" TextColor="White" HorizontalOptions="Center"/>
-                <Button x:Name="btnLogOut" CornerRadius="5" BackgroundColor="DarkGray" Text="LOG OUT" TextColor="White" HorizontalOptions="Center" Clicked="logOutButton"/>
-            </StackLayout>
         </StackLayout>
 
 
-    </ContentPage>
-    <!--end of settings page-->
-    
-</TabbedPage>
+    </ContentPage.Content>
+
+</ContentPage>

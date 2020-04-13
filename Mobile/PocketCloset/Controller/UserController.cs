@@ -20,5 +20,9 @@ namespace PocketCloset.Controller
         {
             return await restAPIService.checkUsernameAsync(username);
         }
+        public async Task<User> getUserFromUsername(String username)
+        {
+            return await restAPIService.getUserFromUsernameAsync(username);
+        }
     }
 }

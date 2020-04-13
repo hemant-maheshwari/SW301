@@ -39,7 +39,7 @@ namespace PocketCloset.Views
             if (user != null)
             {
                 
-                App.Current.MainPage = new HomePage();
+                App.Current.MainPage = new NavPage();
             }
             else
             {

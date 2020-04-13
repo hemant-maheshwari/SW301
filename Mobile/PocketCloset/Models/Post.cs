@@ -13,6 +13,7 @@ namespace PocketCloset.Models
         public double price { get; set; }
         public string url { get; set; } //url to buy clothing article
         public bool isModelPresent { get; set; } //is model present in picture
+      
 
     }
 }

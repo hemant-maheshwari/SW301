@@ -11,7 +11,7 @@ namespace PocketCloset
         {
             InitializeComponent();
 
-            MainPage = new LoginPage();
+            MainPage = new LoginPage(); 
         }
 
         protected override void OnStart()
