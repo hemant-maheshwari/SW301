@@ -22,6 +22,7 @@ namespace PocketCloset.Views
         public CreateOutfitPage()
         {
             InitializeComponent();
+            Init();
         }
         public void Init()
         {

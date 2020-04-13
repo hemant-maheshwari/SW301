@@ -43,6 +43,25 @@ namespace PocketCloset.Service
                 return false;
             }
         }
+
+        public async Task<User> checkUserAsync(User user)
+        {
+            string url = WEB_API_BASE_URL + "user/login/";
+            var json = JsonConvert.SerializeObject(user);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getUserFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(User);
+            }
+        }
+
         public async Task<User> getUserFromUsernameAsync(string username)
         {
             string url = WEB_API_BASE_URL + "user/validateUsername/" + username;

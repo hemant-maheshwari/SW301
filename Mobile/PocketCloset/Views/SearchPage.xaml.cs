@@ -17,7 +17,28 @@ namespace PocketCloset.Views
     {
         private UserController userController;
         private User user;
-        
+
+        public SearchPage(User user)
+        {
+            InitializeComponent();
+            this.user = user;
+            searchLoader.IsVisible = false;
+        }
+        public SearchPage()
+        {
+            InitializeComponent();
+            Init();
+        }
+        public void Init()
+        {
+            BackgroundColor = Constants.backgroundColor;
+            userController = new UserController();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private void searchSuggestionsItemTapped(object sender, ItemTappedEventArgs e)
         {
             Application.Current.MainPage = new AccountPage(/*searchSuggestions*/);
@@ -96,25 +117,6 @@ namespace PocketCloset.Views
                 searchLoader.IsEnabled = false;
                 
             }
-        }
-
-        public SearchPage(User user)
-        {
-            InitializeComponent();
-            this.user = user;
-            searchLoader.IsVisible = false;
-        }
-        public SearchPage()
-        {
-            InitializeComponent();
-        }
-        public void Init()
-        {
-            BackgroundColor = Constants.backgroundColor;
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
         }
     }
 }

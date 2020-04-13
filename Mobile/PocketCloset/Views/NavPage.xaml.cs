@@ -16,6 +16,7 @@ namespace PocketCloset.Views
         public NavPage()
         {
             InitializeComponent();
+            Init();
         }
 
         public NavPage(User user)
@@ -28,7 +29,6 @@ namespace PocketCloset.Views
         public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
-
 
         }
 

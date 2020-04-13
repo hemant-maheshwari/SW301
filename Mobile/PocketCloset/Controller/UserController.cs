@@ -10,7 +10,7 @@ namespace PocketCloset.Controller
     public class UserController: BaseController<User> 
     {
         private RestAPIService restAPIService;
-        
+
         public UserController()
         {
             restAPIService = new RestAPIService();
@@ -20,9 +20,15 @@ namespace PocketCloset.Controller
         {
             return await restAPIService.checkUsernameAsync(username);
         }
+
+        public async Task<User> checkUser(User user)
+        {
+            return await restAPIService.checkUserAsync(user);
+        }
+
         public async Task<User> getUserFromUsername(String username)
         {
             return await restAPIService.getUserFromUsernameAsync(username);
         }
-    }
+    } 
 }
