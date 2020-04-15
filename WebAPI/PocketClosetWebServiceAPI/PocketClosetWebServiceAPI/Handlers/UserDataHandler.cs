@@ -48,7 +48,7 @@ namespace PocketClosetWebServiceAPI.Handlers
             {
                 conn.Open();
                 mySqlCommand.Connection = conn;
-                mySqlCommand.CommandText = "get_cloth";
+                mySqlCommand.CommandText = "get_user";
                 mySqlCommand.CommandType = CommandType.StoredProcedure;
                 mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", userId));
                 MySqlDataReader reader = mySqlCommand.ExecuteReader();
@@ -66,7 +66,7 @@ namespace PocketClosetWebServiceAPI.Handlers
 
         public bool updateUser()
         {
-            return saveUser("create_user");
+            return saveUser("update_user");
         }
 
         private bool saveUser(string command) {
@@ -109,6 +109,110 @@ namespace PocketClosetWebServiceAPI.Handlers
                 conn.Close();           //closing DB connection
             }
             return response;
+        }
+
+        public bool checkUsername(string username)
+        {
+            bool response = false;
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+
+                mySqlCommand.CommandText = "check_username";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                mySqlCommand.Parameters.Add(new MySqlParameter("_username", username));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_response", 0));
+                mySqlCommand.Parameters["_response"].Direction = ParameterDirection.Output;
+
+                mySqlCommand.ExecuteNonQuery();
+
+                var result = mySqlCommand.Parameters["_response"].Value;
+
+                //if result is 1, it means stored procedure ran successfully without any error 
+                if (Convert.ToInt32(result) == 1)
+                {
+                    response = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                //Log exception
+                //LogHandler.LogError("UserDataHandler.createUser()", ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return response;
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return response;
+        }
+
+        public User validateUser(string username)
+        {
+            User user = null;
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            try
+            {
+                conn.Open();
+                mySqlCommand.Connection = conn;
+
+                mySqlCommand.CommandText = "get_user_username";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                mySqlCommand.Parameters.Add(new MySqlParameter("_username", username));
+
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user = getUserFromReader(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            return user;
+        }
+
+        public User findUser()
+        {
+            User user = null;
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            try
+            {
+                conn.Open();
+                mySqlCommand.Connection = conn;
+
+                mySqlCommand.CommandText = "find_user";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+
+                mySqlCommand.Parameters.Add(new MySqlParameter("_username", this.username));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_password", this.password));
+
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    user = getUserFromReader(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            return user;
         }
     }
 }

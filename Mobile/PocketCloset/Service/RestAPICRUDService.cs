@@ -127,6 +127,19 @@ namespace PocketCloset.Service
         private string getWebAPIControllerName()
         {
             string[] fullNameArray = typeof(T).ToString().ToLower().Split('.');
+            string tmpControllerName = fullNameArray[fullNameArray.Length - 1];
+            if (tmpControllerName.Equals("secquestion"))
+            {
+                fullNameArray[fullNameArray.Length - 1] = "secQuestion";            //CONVERT TO CONSTANTS
+            }
+            else if (tmpControllerName.Equals("profilepicture"))
+            {
+                fullNameArray[fullNameArray.Length - 1] = "profilePicture";
+            }
+            else if (tmpControllerName.Equals("postrecord"))
+            {
+                fullNameArray[fullNameArray.Length - 1] = "postRecord";
+            }
             string controllerName = fullNameArray[fullNameArray.Length - 1];
             return controllerName;
         }

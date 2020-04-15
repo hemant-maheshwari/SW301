@@ -11,5 +11,8 @@ namespace PocketClosetWebServiceAPI.Handlers
         bool createUser();
         bool updateUser();
         User getUser(int userId);
+        bool checkUsername(string username);
+        User findUser();
+        User validateUser(string username);
     }
 }

@@ -151,16 +151,18 @@ namespace PocketCloset.Views
             user.password = password;
             try
             {
-                if (await userController.updateModel(user))
+                bool flag = await userController.updateModel(user);
+                if (flag)
                 {
                     await DisplayAlert("Update Success", "Password updated successfully", "Okay");
                     App.Current.MainPage = new LoginPage();
-
                 }
                 else
                 {
                     isActivitySpinnerShowing(false);
                     isUpdatePasswordLayoutShowing(true);
+                    entryNewPassword.Text = "";
+                    entryConfirmNewPassword.Text = "";
                     await DisplayAlert("Update Unsuccessful", "Something went wrong.", "Okay");
                 }
             }

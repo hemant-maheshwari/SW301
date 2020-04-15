@@ -49,6 +49,7 @@ namespace PocketCloset.Views
             }
             else
             {
+                isSignInLayoutShowing(false);
                 isActivitySpinnerShowing(true);
                 signIn();
             }
@@ -96,6 +97,7 @@ namespace PocketCloset.Views
                 activitySpinnerLayout.IsEnabled = true;
                 signInLoader.IsVisible = true;
                 signInLoader.IsEnabled = true;
+                signInLoader.IsRunning = true;
             }
             else
             {
@@ -103,6 +105,7 @@ namespace PocketCloset.Views
                 activitySpinnerLayout.IsEnabled = false;
                 signInLoader.IsVisible = false;
                 signInLoader.IsEnabled = false;
+                signInLoader.IsRunning = false;
             }
         }
 

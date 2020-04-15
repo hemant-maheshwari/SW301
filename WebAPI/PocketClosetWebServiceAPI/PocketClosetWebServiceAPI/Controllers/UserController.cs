@@ -20,6 +20,18 @@ namespace PocketClosetWebServiceAPI.Controllers
             this.config = config;
         }
 
+        [Route("check/{username}")]
+        [HttpGet]
+        public JsonResult checkUsername(string username)
+        {
+            bool result = false;
+            UserDataHandler userDataHandler = new UserDataHandler(config);
+            result = userDataHandler.checkUsername(username);
+            Response response = new Response();
+            response.status = result;
+            return Json(response);
+        }
+
         [Route("create")]
         [HttpPost]
         public JsonResult createUser([FromBody] User user)
@@ -49,11 +61,51 @@ namespace PocketClosetWebServiceAPI.Controllers
             return View();
         }
 
+        [Route("login")]
+        [HttpPost]
+        public JsonResult login([FromBody] User user)
+        {
+            Response response = new Response();
+            try
+            {
+                UserDataHandler userDataHandler = new UserDataHandler(config);
+                userDataHandler.username = user.username;
+                userDataHandler.password = user.password;
+                User completeUser = userDataHandler.findUser();
+                response.status = true;
+                response.data = JsonConvert.SerializeObject(completeUser);
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+            }
+            return Json(response);
+        }
+
         [Route("update")]
         [HttpPost]
         public JsonResult updateUser([FromBody] User user)
         {
             return saveuser(user, "update");
+        }
+
+        [Route("validateUsername/{username}")]
+        [HttpGet]
+        public JsonResult validateUsername(string username)
+        {
+            Response response = new Response();
+            try
+            {
+                UserDataHandler userDataHandler = new UserDataHandler(config);
+                User user = userDataHandler.validateUser(username);
+                response.status = true;
+                response.data = JsonConvert.SerializeObject(user);
+            }
+            catch (Exception ex)
+            {
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
 
         private JsonResult saveuser(User user, string command) {

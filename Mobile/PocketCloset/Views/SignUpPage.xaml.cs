@@ -99,14 +99,14 @@ namespace PocketCloset.Views
             }
         }
 
-        private async Task<bool> checkUsernameExistence(string username)
+            private async Task<bool> checkUsernameExistence(string username)
         {
             return await userController.checkUsername(username);
         }
 
         public async void createUserAccount()
         {
-            User newUser = new User(pickerUserType.SelectedIndex.ToString(), pickerGenderType.SelectedIndex.ToString(), entryFirstName.Text, entryLastName.Text, datePickerDOB.Date.ToShortDateString(), entryEmail.Text, entryUsername.Text, entryPassword.Text);
+            User newUser = new User(pickerUserType.SelectedItem.ToString(), pickerGenderType.SelectedItem.ToString(), entryFirstName.Text, entryLastName.Text, datePickerDOB.Date.ToShortDateString(), entryEmail.Text, entryUsername.Text, entryPassword.Text);
             try
             {
                 if (!await checkUsernameExistence(newUser.username))
@@ -197,6 +197,7 @@ namespace PocketCloset.Views
                 activitySpinnerLayout.IsVisible = true;
                 signUpLoader.IsVisible = true;
                 signUpLoader.IsEnabled = true;
+                signUpLoader.IsRunning = true;
 
             }
             if (status.Equals(false))
@@ -204,6 +205,7 @@ namespace PocketCloset.Views
                 activitySpinnerLayout.IsVisible = false;
                 signUpLoader.IsVisible = false;
                 signUpLoader.IsEnabled = false;
+                signUpLoader.IsRunning = false;
 
             }
         }
