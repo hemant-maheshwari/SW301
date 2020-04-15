@@ -61,7 +61,7 @@ namespace PocketCloset.Views
             try
             {
                 user = await checkUserExistence(user);
-                if (user.userId != 0)
+                if (user != null)
                 {
                     //DisplayAlert("Login", "Login Success", "Okay");
                     App.Current.MainPage = new NavPage(user);          //PASS USER AS PARAMETER!!!!!!!!!!!!!!!!!
