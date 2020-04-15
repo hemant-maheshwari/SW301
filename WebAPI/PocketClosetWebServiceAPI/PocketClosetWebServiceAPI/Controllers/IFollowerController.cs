@@ -11,5 +11,7 @@ namespace PocketClosetWebServiceAPI.Controllers
     {
         JsonResult createFollower(Follower follower);
         JsonResult deleteFollower(int followId);
+        JsonResult getFollowing(int userId);
+        JsonResult getFollowers(int userId);
     }
 }

@@ -14,14 +14,14 @@ namespace PocketCloset.ViewModels
         public ProfilePage profilepageTab { set; get; }
         public SettingsPage settingspageTab { set; get; }
 
-        public NavPageViewModel(User user)
+        /*public NavPageViewModel(User user)
         {
             var homepageTab = new HomePage(user);
             var searchpageTab = new SearchPage(user);
             var createoutfitTab = new CreateOutfitPage(user);
             var profilepageTab = new ProfilePage(user);
             var settingspageTab = new SettingsPage(user);
-        }
+        }*/
 
         
     }

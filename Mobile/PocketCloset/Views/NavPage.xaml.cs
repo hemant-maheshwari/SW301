@@ -1,4 +1,5 @@
 ﻿using PocketCloset.Models;
+using PocketCloset.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,11 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavPage : TabbedPage
     {
-        public NavPage()
-        {
-            InitializeComponent();
-            Init();
-        }
-
         public NavPage(User user)
         {
+            Application.Current.Properties[CommonSettings.GLOBAL_USER] = user;
             InitializeComponent();
             Init();
-
         }
 
         public void Init()

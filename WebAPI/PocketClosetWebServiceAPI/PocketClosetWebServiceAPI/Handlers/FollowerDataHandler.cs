@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -58,6 +59,68 @@ namespace PocketClosetWebServiceAPI.Handlers
             return response;
         }
 
+        public List<FollowViewModel> getFollowers(int userId)
+        {
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            List<FollowViewModel> followViewModels = new List<FollowViewModel>();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "get_all_followers";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", userId));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    FollowViewModel followViewModel = getFollowViewModelFromReader(reader);
+                    followViewModels.Add(followViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return followViewModels;
+        }
+
+        public List<FollowViewModel> getFollowing(int userId)
+        {
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            List<FollowViewModel> followViewModels = new List<FollowViewModel>();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "get_all_following";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", userId));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    FollowViewModel followViewModel = getFollowViewModelFromReader(reader);
+                    followViewModels.Add(followViewModel);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return followViewModels;
+        }
+
         private bool saveFollower(string command) {
             bool response = false;
             string connectionString = config.GetConnectionString("DefaultConnection");
@@ -90,6 +153,15 @@ namespace PocketClosetWebServiceAPI.Handlers
                 conn.Close();           //closing DB connection
             }
             return response;
+        }
+
+        private FollowViewModel getFollowViewModelFromReader(MySqlDataReader reader) {
+            FollowViewModel followViewModel = new FollowViewModel();
+            followViewModel.userId = Int32.Parse(reader["user_id"].ToString());
+            followViewModel.username = reader["username"].ToString();
+            followViewModel.firstName = reader["first_name"].ToString();
+            followViewModel.lastName = reader["last_name"].ToString();
+            return followViewModel;
         }
 
     }

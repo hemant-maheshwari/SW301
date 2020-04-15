@@ -1,5 +1,6 @@
 ﻿using PocketCloset.Controller;
 using PocketCloset.Models;
+using PocketCloset.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,28 +18,19 @@ namespace PocketCloset.Views
     public partial class SettingsPage : ContentPage
     {
         private UserController userController;
-        User user;
+        private User user;
          
-        public SettingsPage(User user)
-        {
-            InitializeComponent();
-            Init();
-            this.user = user;
-        }
-
         public SettingsPage()
         {
             InitializeComponent();
+            Init();
         }
 
         public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
             boxViewSettings.Color = Constants.logoColor;
-
             userController = new UserController();
-            initializeAccountInfo();
-
         }
 
         private void initializeAccountInfo()
@@ -50,7 +42,8 @@ namespace PocketCloset.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+            initializeAccountInfo();
 
         }
         public void logOut(object sender, EventArgs e)

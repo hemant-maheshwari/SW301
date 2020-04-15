@@ -18,12 +18,12 @@ namespace PocketCloset.Views
         private UserController userController;
         private User user;
 
-        public SearchPage(User user)
+        /*public SearchPage(User user)
         {
             InitializeComponent();
             this.user = user;
             searchLoader.IsVisible = false;
-        }
+        }*/
         public SearchPage()
         {
             InitializeComponent();
