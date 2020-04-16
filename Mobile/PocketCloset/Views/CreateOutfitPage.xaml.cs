@@ -1,4 +1,6 @@
-﻿using PocketCloset.Models;
+﻿using PocketCloset.Controller;
+using PocketCloset.Models;
+using PocketCloset.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CreateOutfitPage : ContentPage
     {
+        private UserController userController;
+        private User user;
         public CreateOutfitPage(User user)
         {
             InitializeComponent();
@@ -33,7 +37,8 @@ namespace PocketCloset.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+            
 
         }
     }

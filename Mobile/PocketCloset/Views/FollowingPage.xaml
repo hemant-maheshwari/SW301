@@ -4,29 +4,47 @@
              x:Class="PocketCloset.Views.FollowingPage">
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness" >
+                    <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                    <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
+                </OnIdiom>
+            </StackLayout.Padding>
+
+            <StackLayout x:Name="activitySpinnerFollowingLayout" IsVisible="False" IsEnabled="False">
+                <ActivityIndicator x:Name="followingLoader" Color="DarkOrange" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
+                <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
+            </StackLayout>
+
             <StackLayout Orientation="Horizontal">
                 <Image x:Name="LoginIcon" Source="LoginIcon.png" HeightRequest="60"  Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
                 <Label Text="Following"  Margin="12,15,0,0" FontAttributes="Bold" FontSize="45" TextColor="White" FontFamily="MS Gothic"  />
             </StackLayout>
-            <StackLayout x:Name="Welcome3" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
+            <StackLayout x:Name="Welcome4" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
                 <BoxView x:Name="boxViewFollowing" WidthRequest ="200" HeightRequest="2"/>
             </StackLayout>
-            <StackLayout Orientation="Vertical" x:Name="followersStackLayout" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
-                <ListView x:Name="followingListView"  ItemsSource="{Binding Items}"  HasUnevenRows="True"> <!--VerticalOptions="FillAndExpand" -->
+            <StackLayout Orientation="Vertical" x:Name="followingLayout"  IsVisible="True" IsEnabled="True" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
+                <ListView ItemsSource="{Binding followingList}" HasUnevenRows="False">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell IsEnabled="False">
-                                <StackLayout Padding="1">
-                                    <Label x:Name="lblFollowingName" Text="{Binding Name}" LineBreakMode="NoWrap" TextColor="White" FontSize="15"/>
+                            <ViewCell>
+                                <StackLayout x:Name="followingInfo" Orientation="Vertical">
+                                    <Label x:Name="fllwnguser" Text="{Binding uName}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Entry x:Name="fllwngfirst" Text="{Binding fname}"  Placeholder="First Name" TextColor="Black" />
+                                        <Entry x:Name="fllwnglast" Text="{Binding lname}" Placeholder="Last Name" TextColor="Black"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <StackLayout Padding="1">
+
+            </StackLayout>
+            <StackLayout Padding="1">
                     <Button BackgroundColor="DarkGray" Text="Back to Home Page" TextColor="White" FontSize="12" Clicked="goToHomePage"/>
                 </StackLayout>
             </StackLayout>
-        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>

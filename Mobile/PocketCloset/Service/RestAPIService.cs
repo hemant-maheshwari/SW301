@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using PocketCloset.Models;
 using PocketCloset.Util;
+using PocketCloset.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,7 +78,43 @@ namespace PocketCloset.Service
                 Debug.WriteLine("Error Occured!");
                 return default(User);
             }
-        }
 
+        }
+        public async Task<List<FollowViewModel>> getAllFollowersAsync(int userId)
+        {
+            string url = WEB_API_BASE_URL + "follower/getFollowers/" + userId;
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getFollowViewModelsFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(List<FollowViewModel>);
+            }
+        }
+        private List<FollowViewModel> getFollowViewModelsFromResponse(Response response)
+        {
+            string listString = response.data;
+            FollowViewModel[] followViewModelArray = JsonConvert.DeserializeObject<FollowViewModel[]>(listString);
+            return followViewModelArray.ToList<FollowViewModel>();
+        }
+        public async Task<List<FollowViewModel>> getAllFollowingAsync(int userId)
+        {
+            string url = WEB_API_BASE_URL + "follower/getFollowing/" + userId;
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getFollowViewModelsFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(List<FollowViewModel>);
+            }
+        }
     }
 }

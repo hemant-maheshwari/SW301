@@ -1,4 +1,6 @@
-﻿using PocketCloset.Models;
+﻿using PocketCloset.Controller;
+using PocketCloset.Models;
+using PocketCloset.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +15,15 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
-        public ProfilePage(User user)
-        {
-            InitializeComponent();
-            Init();
-        }
+
+        private UserController userController;
+        private User user;
+
+
         public ProfilePage()
         {
             InitializeComponent();
+            Init();
         }
         public void Init()
         {
@@ -30,7 +33,8 @@ namespace PocketCloset.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+            
 
         }
         public void goToFollowersPage(object sender, EventArgs e)

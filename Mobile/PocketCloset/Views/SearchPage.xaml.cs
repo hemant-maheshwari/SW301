@@ -1,5 +1,6 @@
 ﻿using PocketCloset.Controller;
 using PocketCloset.Models;
+using PocketCloset.Util;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,12 +19,6 @@ namespace PocketCloset.Views
         private UserController userController;
         private User user;
 
-        /*public SearchPage(User user)
-        {
-            InitializeComponent();
-            this.user = user;
-            searchLoader.IsVisible = false;
-        }*/
         public SearchPage()
         {
             InitializeComponent();
@@ -37,6 +32,9 @@ namespace PocketCloset.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+          
+
         }
 
         private void searchSuggestionsItemTapped(object sender, ItemTappedEventArgs e)
@@ -79,6 +77,7 @@ namespace PocketCloset.Views
                 else
                 {
                      await DisplayAlert("Message", "User not Found", "Okay");
+                    isActivitySpinnerShowing(false);
                 }
             }
             catch (Exception ex)

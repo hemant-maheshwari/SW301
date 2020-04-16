@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PocketCloset.Controller;
 using PocketCloset.Models;
-
+using PocketCloset.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
 
@@ -15,14 +16,20 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        public HomePage(User user)
-        {
 
+        private UserController userController;
+        private User user;
+
+        public HomePage(){
             InitializeComponent();
             Init();
         }
-        public HomePage(){
-            InitializeComponent();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+            
+
         }
         public void Init()
         {
@@ -30,15 +37,12 @@ namespace PocketCloset.Views
             //boxViewPostDivider.Color = Constants.logoColor;
 
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-        
-       /* private void addPostFunction(object sender, EventArgs e)
-        {
-           // feedLayout.Children.Add(newPosts);
-        }
-        */
+       
+
+        /* private void addPostFunction(object sender, EventArgs e)
+         {
+            // feedLayout.Children.Add(newPosts);
+         }
+         */
     }
 }

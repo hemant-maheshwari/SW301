@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using PocketCloset.Controller;
 using PocketCloset.Models;
-
+using PocketCloset.Service;
+using PocketCloset.Util;
+using PocketCloset.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -13,29 +15,43 @@ namespace PocketCloset.Views
     public partial class FollowersPage : ContentPage
     {
         private UserController userController;
+        private FollowerController followerController;
         private User user;
+       
+
         public FollowersPage()
         {
             InitializeComponent();
             Init();
         }
-        public void Init()
+
+        public async void Init()
         {
             BackgroundColor = Constants.backgroundColor;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             boxViewFollower.Color = Constants.logoColor;
+            followerController = new FollowerController();
+            List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
+            //followerList.ItemsSource = followers;
         }
         public void goToHomePage(object sender, EventArgs e)
         {
-            App.Current.MainPage = new HomePage();
+            App.Current.MainPage = new NavPage(user);
         }
         public void followerListItemTapped(object sender, ItemTappedEventArgs e)
         {
             Application.Current.MainPage = new AccountPage(/*e.Item*/);
         }
-        public void followerListPopulate()
+        public async void followerListPopulate()
+        {  
+           //  List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId); 
+        }
+        protected override void OnAppearing()
         {
-         
+            base.OnAppearing();
+            user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
+
+
         }
         public void isActivitySpinnerShowing(bool status)
         {
