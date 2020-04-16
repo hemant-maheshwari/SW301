@@ -24,15 +24,15 @@
                 <BoxView x:Name="boxViewFollowing" WidthRequest ="200" HeightRequest="2"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" x:Name="followingLayout"  IsVisible="True" IsEnabled="True" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
-                <ListView ItemsSource="{Binding followingList}" HasUnevenRows="False">
+                <ListView ItemsSource="{Binding Followers}" HasUnevenRows="False">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout x:Name="followingInfo" Orientation="Vertical">
-                                    <Label x:Name="fllwnguser" Text="{Binding uName}" />
+                                    <Label x:Name="fllwnguser" Text="{Binding userName}" />
                                     <StackLayout Orientation="Horizontal">
-                                        <Entry x:Name="fllwngfirst" Text="{Binding fname}"  Placeholder="First Name" TextColor="Black" />
-                                        <Entry x:Name="fllwnglast" Text="{Binding lname}" Placeholder="Last Name" TextColor="Black"/>
+                                        <Entry x:Name="fllwngfirst" Text="{Binding firstName}"  Placeholder="First Name" TextColor="Black" />
+                                        <Entry x:Name="fllwnglast" Text="{Binding lastName}" Placeholder="Last Name" TextColor="Black"/>
                                     </StackLayout>
                                 </StackLayout>
                             </ViewCell>

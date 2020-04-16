@@ -32,11 +32,8 @@ namespace PocketCloset.Views
             BackgroundColor = Constants.backgroundColor;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             boxViewFollowing.Color = Constants.logoColor;
-            followerController = new FollowerController();
-            List<FollowViewModel> following = await followerController.getAllFollowing(user.userId);
-            
-            //followingList.ItemsSource = following;
-            
+            BindingContext = followerController = new FollowerController();
+            await followerController.getAllFollowing(user.userId);            
         }
         public void goToHomePage(object sender, EventArgs e)
         {
