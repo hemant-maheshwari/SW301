@@ -30,6 +30,8 @@ namespace PocketCloset.Views
         {
             BackgroundColor = Constants.backgroundColor;
             boxViewSettings.Color = Constants.logoColor;
+            btnLogOut.BackgroundColor = Constants.logoColor;
+            btnUpdateAccInfo.BackgroundColor = Constants.logoColor;
             userController = new UserController();
         }
 
@@ -69,25 +71,36 @@ namespace PocketCloset.Views
                 entryAccEmail.Focus();
                 entryAccEmail.Text = "";
             }
-            else if (entryAccPassword.Text == null || entryAccPassword.Text == "")
+            else if (entryAccPassword.Text != null && entryAccPassword.Text != "")
             {
-                DisplayAlert("Invalid Password", "Please enter a valid password.", "Okay");
-                entryAccPassword.Focus();
-            }
-            else if (entryAccConfirmPassword.Text == null || entryAccConfirmPassword.Text == "")
-            {
-                DisplayAlert("Invalid Confirmation", "Please enter your password again.", "Okay");
-                entryAccConfirmPassword.Focus();
-                entryAccConfirmPassword.Text = "";
-            }
-            else if (!passwordsMatch(entryAccPassword.Text, entryAccConfirmPassword.Text))
-            {
-                DisplayAlert("Invalid Password Confirmation", "Passwords do not match. Try again.", "Okay");
-                entryAccConfirmPassword.Focus();
-                entryAccConfirmPassword.Text = "";
+                if (entryAccConfirmPassword.Text == null || entryAccConfirmPassword.Text == "")
+                {
+                    DisplayAlert("Invalid Confirmation", "Please enter your password again.", "Okay");
+                    entryAccConfirmPassword.Focus();
+                    entryAccConfirmPassword.Text = "";
+                }
+                else if (!passwordsMatch(entryAccPassword.Text, entryAccConfirmPassword.Text))
+                {
+                    DisplayAlert("Invalid Password Confirmation", "Passwords do not match. Try again.", "Okay");
+                    entryAccConfirmPassword.Focus();
+                    entryAccConfirmPassword.Text = "";
+                }
+                else
+                {
+                    user.firstName = entryAccFirstName.Text;
+                    user.lastName = entryAccLastName.Text;
+                    user.email = entryAccEmail.Text;
+                    user.password = entryAccPassword.Text;
+                    isUpdateAccLayoutShowing(false);
+                    isActivitySpinnerShowing(true);
+                    updateUserAccount();
+                }
             }
             else
             {
+                user.firstName = entryAccFirstName.Text;
+                user.lastName = entryAccLastName.Text;
+                user.email = entryAccEmail.Text;
                 isUpdateAccLayoutShowing(false);
                 isActivitySpinnerShowing(true);
                 updateUserAccount();
@@ -98,7 +111,7 @@ namespace PocketCloset.Views
 
         public async void updateUserAccount()
         {
-            user.updateUser(entryAccFirstName.Text, entryAccLastName.Text, entryAccEmail.Text, entryAccPassword.Text);
+            user.updateUser(user.firstName, user.lastName, user.email, user.password);
             try
             {
                 bool flag = await userController.updateModel(user);

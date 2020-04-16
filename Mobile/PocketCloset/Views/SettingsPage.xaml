@@ -23,22 +23,24 @@
                 <BoxView x:Name="boxViewSettings" WidthRequest ="200" HeightRequest="2"/>
                 <Label Text="Edit your account information" TextColor="White" FontSize="15" />
             </StackLayout>
-            <StackLayout x:Name="activitySpinnerLayout" IsVisible="False" IsEnabled="False">
-                    <ActivityIndicator x:Name="updateAccLoader" Color="White" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
-                    <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
-                </StackLayout>
-            <StackLayout x:Name="updateAccLayout" Margin="0,30,0,0">
-                <Entry x:Name="entryAccFirstName" Placeholder="First Name" TextColor="White" PlaceholderColor="LightGray"/>
-                <Entry x:Name="entryAccLastName" Placeholder="Last Name" TextColor="White" PlaceholderColor="LightGray"/>
-                <Entry x:Name="entryAccEmail" Placeholder="Email" TextColor="White" PlaceholderColor="LightGray" Keyboard="Email"/>
-                <StackLayout x:Name="passwordLayout">
-                    <Entry x:Name="entryAccPassword" Placeholder="Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
-                    <Entry x:Name="entryAccConfirmPassword" Placeholder="Confirm Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
-                </StackLayout>
+            <StackLayout x:Name="activitySpinnerLayout" IsVisible="False" IsEnabled="False" VerticalOptions="CenterAndExpand">
+                <ActivityIndicator x:Name="updateAccLoader" Color="White" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
+                <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
             </StackLayout>
-            <StackLayout Margin="0,40">
-                <Button x:Name="btnUpdateAccInfo" CornerRadius="5" BackgroundColor="DarkGray" Text="Update Information" TextColor="White" HorizontalOptions="Center" Clicked="updateUserForm"/>
-                <Button x:Name="btnLogOut" CornerRadius="5" BackgroundColor="DarkGray" Text="LOG OUT" TextColor="White" HorizontalOptions="Center" Clicked="logOut"/>
+            <StackLayout x:Name="updateAccLayout" >
+                <StackLayout Margin="0,30,0,0">
+                    <Entry x:Name="entryAccFirstName" Placeholder="First Name" TextColor="White" PlaceholderColor="LightGray"/>
+                    <Entry x:Name="entryAccLastName" Placeholder="Last Name" TextColor="White" PlaceholderColor="LightGray"/>
+                    <Entry x:Name="entryAccEmail" Placeholder="Email" TextColor="White" PlaceholderColor="LightGray" Keyboard="Email"/>
+                    <StackLayout x:Name="passwordLayout">
+                        <Entry x:Name="entryAccPassword" Placeholder="Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
+                        <Entry x:Name="entryAccConfirmPassword" Placeholder="Confirm Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Margin="0,40">
+                    <Button x:Name="btnUpdateAccInfo" CornerRadius="5" Text="Update Information" TextColor="White" HorizontalOptions="Center" Clicked="updateUserForm"/>
+                    <Button x:Name="btnLogOut" CornerRadius="5" Text="LOG OUT" TextColor="White" HorizontalOptions="Center" Clicked="logOut"/>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
