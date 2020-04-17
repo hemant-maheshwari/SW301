@@ -24,17 +24,22 @@
                 <BoxView x:Name="boxViewFollowing" WidthRequest ="200" HeightRequest="2"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" x:Name="followingLayout"  IsVisible="True" IsEnabled="True" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
-                <ListView ItemsSource="{Binding Followers}" HasUnevenRows="False">
+                <ListView x:Name="followingListView" ItemTapped="followingListItemTapped">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout x:Name="followingInfo" Orientation="Vertical">
-                                    <Label x:Name="fllwnguser" Text="{Binding userName}" />
-                                    <StackLayout Orientation="Horizontal">
-                                        <Entry x:Name="fllwngfirst" Text="{Binding firstName}"  Placeholder="First Name" TextColor="Black" />
-                                        <Entry x:Name="fllwnglast" Text="{Binding lastName}" Placeholder="Last Name" TextColor="Black"/>
+                                <ContentView>
+                                    <StackLayout>
+                                        <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                                                <Label x:Name="lblUserId" Text="{Binding userId}" IsVisible="False"/>
+                                                <Label x:Name="lblUserName" Text="{Binding userName}" TextColor="White" FontSize="15"/>
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label x:Name="lblLirstName" Text="{Binding firstName}"  TextColor="White" FontSize="10"/>
+                                                <Label x:Name="lblLastName" Text="{Binding lastName}"  TextColor="White" FontSize="10"/>
+                                            </StackLayout>
+                                        </StackLayout>
                                     </StackLayout>
-                                </StackLayout>
+                                </ContentView>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

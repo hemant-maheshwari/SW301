@@ -33,15 +33,11 @@ namespace PocketCloset.Views
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
-          
-
         }
-
-        private void searchSuggestionsItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            Application.Current.MainPage = new AccountPage(/*searchSuggestions*/);
+        public void goToUserAccount(object sender, EventArgs e)
+        {   
+            Application.Current.MainPage = new AccountPage();
         }
-
         public void searchButtonPressed(object sender, EventArgs e)
         {
             var keyword = searchPageBar.Text;
@@ -55,8 +51,7 @@ namespace PocketCloset.Views
             else 
             {
                 isActivitySpinnerShowing(true);
-                 searchUser();
-                
+                searchUser();
             }
         }
         
@@ -72,7 +67,8 @@ namespace PocketCloset.Views
 
                     user = foundUser;
                    
-                    searchSuggestions.ItemsSource = foundUser.username;
+                    searchSuggestions.Text = foundUser.username;
+                    searchSuggestions.IsVisible = true;
                 }
                 else
                 {
@@ -104,6 +100,7 @@ namespace PocketCloset.Views
                 searchLoader.IsVisible = true;
                 searchLoader.IsRunning = true;
                 searchLoader.IsEnabled = true;
+                
                
             }
             if (status.Equals(false))

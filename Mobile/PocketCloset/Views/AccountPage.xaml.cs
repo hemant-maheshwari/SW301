@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PocketCloset.Controller;
 using PocketCloset.Models;
 using PocketCloset.Util;
 using Xamarin.Forms;
@@ -13,6 +14,7 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountPage : ContentPage
     {
+        private UserController userController;
         private User user;
         public AccountPage()
         {

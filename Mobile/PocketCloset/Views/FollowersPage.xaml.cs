@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using PocketCloset.Controller;
 using PocketCloset.Models;
 using PocketCloset.Service;
@@ -14,7 +15,6 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FollowersPage : ContentPage
     {
-        private UserController userController;
         private FollowerController followerController;
         private User user;
        
@@ -25,14 +25,12 @@ namespace PocketCloset.Views
             Init();
         }
 
-        public async void Init()
+        public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             boxViewFollower.Color = Constants.logoColor;
             followerController = new FollowerController();
-            List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
-            //followerList.ItemsSource = followers;
         }
         public void goToHomePage(object sender, EventArgs e)
         {
@@ -40,18 +38,15 @@ namespace PocketCloset.Views
         }
         public void followerListItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Application.Current.MainPage = new AccountPage(/*e.Item*/);
-        }
-        public async void followerListPopulate()
-        {  
-           //  List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId); 
-        }
-        protected override void OnAppearing()
+            // Application.Current.MainPage = new AccountPage(user);
+        } 
+           
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
-
-
+            ObservableCollection<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
+            followersListView.ItemsSource = followers;
         }
         public void isActivitySpinnerShowing(bool status)
         {
@@ -79,3 +74,4 @@ namespace PocketCloset.Views
 
     }
 }
+// List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);

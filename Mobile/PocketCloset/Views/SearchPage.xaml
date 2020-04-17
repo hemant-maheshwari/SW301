@@ -22,15 +22,13 @@
                 <ActivityIndicator x:Name="searchLoader" Color="DarkOrange" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
                 <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
             </StackLayout>
-            
-        <StackLayout x:Name="searchLayout" IsEnabled="True" IsVisible="True">
-       
-            <SearchBar x:Name="searchPageBar" Placeholder="Search..."  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
-            <Grid>
-                <ListView x:Name="searchSuggestions" ItemTapped="searchSuggestionsItemTapped"/>
-            </Grid>
-        </StackLayout>
 
+            <StackLayout x:Name="searchLayout" IsEnabled="True" IsVisible="True" Orientation="Vertical">
+
+                <SearchBar x:Name="searchPageBar" Placeholder="Search User"  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
+
+                <Button x:Name="searchSuggestions" Text="" BorderColor="DarkOrange" CornerRadius="20" TextColor="Black" IsVisible="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="goToUserAccount"/>
+            </StackLayout>
 
         </StackLayout>
     </ContentPage.Content>

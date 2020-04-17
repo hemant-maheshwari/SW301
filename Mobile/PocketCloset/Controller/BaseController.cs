@@ -1,12 +1,13 @@
 ﻿using PocketCloset.Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PocketCloset.Controller
 {
-    public class BaseController<T>
+    public class BaseController<T> 
     {
         protected RestAPICRUDService<T> RestAPICRUDService;
 
@@ -40,6 +41,7 @@ namespace PocketCloset.Controller
         {
             return await RestAPICRUDService.updateModelAsync(modelObject);
         }
+        
 
     }
 }

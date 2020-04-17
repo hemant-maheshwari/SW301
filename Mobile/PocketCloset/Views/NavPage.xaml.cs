@@ -20,7 +20,6 @@ namespace PocketCloset.Views
             InitializeComponent();
             Init();
         }
-
         public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
