@@ -13,5 +13,6 @@ namespace PocketClosetWebServiceAPI.Controllers
         JsonResult updateCloth(Cloth cloth);
         JsonResult getCloth(int clothId);
         JsonResult getAllClothes(int userId);
+        JsonResult createNewCloth(Cloth cloth);
     }
 }

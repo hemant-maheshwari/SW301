@@ -141,5 +141,40 @@ namespace PocketClosetWebServiceAPI.Handlers
             else return 0;
         }
 
+        public Post createNewPost()
+        {
+            Post post = null;
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "create_new_post";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_cloth_id", this.clothId));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", this.userId));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_post_id", this.postId));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_model_present", getIntFromBool(this.isModelPresent)));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_price", this.price));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_url", this.url));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    post = getPostFromReader(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return default(Post);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return post;
+        }
     }
 }

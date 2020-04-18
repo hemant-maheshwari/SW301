@@ -4,9 +4,7 @@ using PocketCloset.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PocketClosetWebServiceAPI.Handlers
 {
@@ -63,7 +61,7 @@ namespace PocketClosetWebServiceAPI.Handlers
             cloth.color = reader["color"].ToString();
             cloth.season = reader["season"].ToString();
             cloth.material = reader["material"].ToString();
-            cloth.clothPicture = Encoding.ASCII.GetBytes(reader["cloth_picture"].ToString());
+            cloth.clothPicture = Encoding.UTF8.GetString((byte[])reader["cloth_picture"]);            
             return cloth;
         }
 
@@ -131,5 +129,40 @@ namespace PocketClosetWebServiceAPI.Handlers
             return response;
         }
 
+        public Cloth createNewCloth()
+        {
+            Cloth cloth = null;
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "create_new_cloth";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", this.userId));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_cloth_type", this.clothType));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_cloth_picture", this.clothPicture));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_season", this.season));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_material", this.material));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_color", this.color));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    cloth = getClothFromReader(reader);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return default(Cloth);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return cloth;
+        }
     }
 }
