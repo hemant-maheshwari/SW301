@@ -35,13 +35,13 @@ namespace PocketCloset.Views
             InitializeComponent();
             Init();
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
-           // List<FeedViewModel> feeds = await followingController.getAllFollowing(user.userId);
-            //feedListView.ItemsSource = feeds;
-            //  isActivitySpinnerShowing(false);
+            List<FeedViewModel> feeds = await postController.getAllFeeds(user.userId);
+            feedListView.ItemsSource = feeds;
+           // isActivitySpinnerShowing(false);
         }
         public void Init()
         {
@@ -49,8 +49,7 @@ namespace PocketCloset.Views
             userController = new UserController();
             clothController = new ClothController();
             postController = new PostController();
-            postRecordController = new PostRecordController();
-            
+            postRecordController = new PostRecordController();         
 
         }
 
@@ -59,7 +58,7 @@ namespace PocketCloset.Views
             feedPage.IsVisible = false;
             addpostLayout.IsVisible = true;
          }
-        /*
+        
         public async void createPost(object sender, EventArgs e)
         {
             try {
@@ -77,7 +76,7 @@ namespace PocketCloset.Views
                         bool flag = await postRecordController.createModel(postRecord);
                         if (flag) {
                             await DisplayAlert("Message", "Post Create Successfully!", "Okay");
-                            App.Current.MainPage = new ProfilePage();
+                            App.Current.MainPage = new HomePage();
                         }
                         else
                         {
@@ -104,7 +103,7 @@ namespace PocketCloset.Views
                     return base64String;
                 }
             }
-        } */
+        } 
 
         public interface CameraInterface
         {

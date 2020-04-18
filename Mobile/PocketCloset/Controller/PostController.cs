@@ -1,5 +1,6 @@
 ﻿using PocketCloset.Models;
 using PocketCloset.Service;
+using PocketCloset.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,9 +17,14 @@ namespace PocketCloset.Controller
             restAPIService = new RestAPIService();
         }
 
-        //public Task<Post> createPost(Post post) {
-        //    return await restAPIService.createPost(post);
-        //}
+        public async Task<Post> createPost(Post post) {
+            return await restAPIService.createPost(post);
+        }
+
+        public async Task<List<FeedViewModel>> getAllFeeds(int userId) {
+            return await restAPIService.getFeeds(userId);
+        }
+        
 
     }
 }

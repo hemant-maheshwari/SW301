@@ -13,6 +13,7 @@ namespace PocketClosetWebServiceAPI.Controllers
         JsonResult getPost(int postId);
         JsonResult getAllPosts(int userId);
         JsonResult createNewPost(Post post);
+        JsonResult getFeeds(int userId);
 
     }
 }

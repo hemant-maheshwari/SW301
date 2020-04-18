@@ -42,7 +42,18 @@ namespace PocketCloset.Service
             return post;
         }
 
-        
+        private List<FeedViewModel> getFeedViewModelsFromResponse(Response response) {
+            string feedsString = response.data;
+            FeedViewModel[] models = JsonConvert.DeserializeObject<FeedViewModel[]>(feedsString);
+            return models.ToList<FeedViewModel>();
+        }
+
+        private List<FollowViewModel> getFollowViewModelsFromResponse(Response response)
+        {
+            string listString = response.data;
+            FollowViewModel[] followViewModelArray = JsonConvert.DeserializeObject<FollowViewModel[]>(listString);
+            return followViewModelArray.ToList<FollowViewModel>();
+        }
 
         public async Task<bool> checkUsernameAsync(string username)
         {
@@ -109,12 +120,7 @@ namespace PocketCloset.Service
                 return default(List<FollowViewModel>);
             }
         }
-        private List<FollowViewModel> getFollowViewModelsFromResponse(Response response)
-        {
-            string listString = response.data;
-            FollowViewModel[] followViewModelArray = JsonConvert.DeserializeObject<FollowViewModel[]>(listString);
-            return followViewModelArray.ToList<FollowViewModel>();
-        }
+        
         public async Task<List<FollowViewModel>> getAllFollowingAsync(int userId)
         {
             string url = WEB_API_BASE_URL + "follower/getFollowing/" + userId;
@@ -163,6 +169,21 @@ namespace PocketCloset.Service
             {
                 Debug.WriteLine("Error Occured!");
                 return default(Post);
+            }
+        }
+
+        public async Task<List<FeedViewModel>> getFeeds(int userId) {
+            string url = WEB_API_BASE_URL + "post/getFeeds/" + userId;
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getFeedViewModelsFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(List<FeedViewModel>);
             }
         }
     }

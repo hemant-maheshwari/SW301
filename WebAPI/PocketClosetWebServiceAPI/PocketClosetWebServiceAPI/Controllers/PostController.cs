@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PocketCloset.Models;
 using PocketClosetWebServiceAPI.Handlers;
 using PocketClosetWebServiceAPI.Models;
+using PocketClosetWebServiceAPI.ViewModels;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -57,6 +58,26 @@ namespace PocketClosetWebServiceAPI.Controllers
         public JsonResult getAllPosts(int userId)
         {
             return findPosts(userId, "getAll");
+        }
+
+        [Route("getFeeds/{userId}")]
+        [HttpGet]
+        public JsonResult getFeeds(int userId)
+        {
+            Response response = new Response();
+            PostDataHandler postDataHandler = new PostDataHandler(config);
+            try
+            {
+                List<FeedViewModel> feeds = postDataHandler.getAllFeeds(userId);
+                response.data = JsonConvert.SerializeObject(feeds);                
+                response.status = true;
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
 
         [Route("get/{postId}")]

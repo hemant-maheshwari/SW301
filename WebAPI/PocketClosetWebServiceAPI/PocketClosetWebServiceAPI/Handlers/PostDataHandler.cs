@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PocketClosetWebServiceAPI.Handlers
@@ -176,5 +178,46 @@ namespace PocketClosetWebServiceAPI.Handlers
             }
             return post;
         }
+
+        public List<FeedViewModel> getAllFeeds(int userId)
+        {
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            List<FeedViewModel> feeds = new List<FeedViewModel>();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "get_all_feeds";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", userId));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    FeedViewModel feed = getFeedViewModelFromReader(reader);
+                    feeds.Add(feed);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return feeds;
+        }
+
+        private FeedViewModel getFeedViewModelFromReader(MySqlDataReader reader) {
+            FeedViewModel feedViewModel = new FeedViewModel();
+            feedViewModel.username = reader["username"].ToString();
+            feedViewModel.userProfiePicture = Encoding.UTF8.GetString((byte[])reader["profile_picture"]);
+            feedViewModel.clothPicture = Encoding.UTF8.GetString((byte[])reader["cloth_picture"]);
+            feedViewModel.datePosted = reader["date_posted"].ToString();
+            return feedViewModel;
+        }
+
     }
 }
