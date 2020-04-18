@@ -17,8 +17,6 @@ namespace PocketCloset.Views
     {
         private FollowerController followerController;
         private User user;
-       
-
         public FollowersPage()
         {
             InitializeComponent();
@@ -45,7 +43,7 @@ namespace PocketCloset.Views
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
-            ObservableCollection<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
+            List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
             followersListView.ItemsSource = followers;
         }
         public void isActivitySpinnerShowing(bool status)

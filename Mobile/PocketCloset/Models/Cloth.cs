@@ -7,6 +7,15 @@ namespace PocketCloset.Models
         {
         }
 
+        public Cloth(int userId, string clothType, string clothPicture, string color, string material, string season) {
+            this.userId = userId;
+            this.clothType = clothType;
+            this.clothPicture = clothPicture;
+            this.color = color;
+            this.material = material;
+            this.season = season;
+        }
+
         public int clothId { get; set; }
         public int userId { get; set; }
         public string clothType { get; set; }
@@ -14,14 +23,8 @@ namespace PocketCloset.Models
         public string color { get; set; }
         public string material { get; set; }
         public string season { get; set; }
+            
 
-//        Cloth_id: int[AI][PK][NN]
-//User_id: int
-//Type: string
-//Picture: string/ blob(clob)
-//Color: string
-//Material: string
-//Season: string
 
     }
 }

@@ -19,6 +19,23 @@ namespace PocketClosetWebServiceAPI.Controllers
             this.config = config;
         }
 
+        [Route("createNew")]
+        [HttpPost]
+        public JsonResult createNewPost([FromBody] Post post)
+        {
+            Response response = new Response();
+            PostDataHandler postDataHandler = new PostDataHandler(config);
+            postDataHandler.clothId = post.clothId;
+            postDataHandler.userId = post.userId;
+            postDataHandler.isModelPresent = post.isModelPresent;
+            postDataHandler.postId = post.postId;
+            postDataHandler.price = post.price;
+            postDataHandler.url = post.url;
+            post = postDataHandler.createNewPost();
+            response.data = JsonConvert.SerializeObject(post);
+            return Json(response);
+        }
+
         [Route("create")]
         [HttpPost]
         public JsonResult createPost([FromBody] Post post)

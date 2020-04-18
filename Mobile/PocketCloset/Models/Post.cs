@@ -7,6 +7,14 @@ namespace PocketCloset.Models
         {
         }
 
+        public Post(int userId, int clothId, double price, string url, bool isModelPresent) {
+            this.userId = userId;
+            this.clothId = clothId;
+            this.price = price;
+            this.url = url;
+            this.isModelPresent = isModelPresent;
+        }
+
         public int userId { get; set; }
         public int postId { get; set; }
         public int clothId { get; set; }

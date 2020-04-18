@@ -1,64 +1,128 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:ffTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
-             x:Class="PocketCloset.Views.HomePage"
-             NavigationPage.HasNavigationBar="False">
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+        xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+        xmlns:ffTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+        xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+        x:Class="PocketCloset.Views.HomePage"
+        NavigationPage.HasNavigationBar="False">
 
 
 
     <ContentPage.Content>
 
-        <StackLayout x:Name="mainPage">
+        <StackLayout x:Name="Master">
 
-            <ScrollView VerticalScrollBarVisibility="Never">
 
-                <StackLayout x:Name="feedLayout" IsVisible="True">
+            <StackLayout x:Name="feedPage" IsVisible="True" IsEnabled="True">
+                <StackLayout x:Name="feedLayout" IsVisible="True" IsEnabled="True">
+                    <ListView x:Name="followingListView" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ContentView>
+                                        <StackLayout>
 
-                    <StackLayout Orientation="Vertical" >
+                                            <StackLayout.Padding>
+                                                <OnIdiom x:TypeArguments="Thickness" >
+                                                    <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                                                    <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
+                                                </OnIdiom>
+                                            </StackLayout.Padding>
 
-                        <StackLayout.Padding>
-                            <OnIdiom x:TypeArguments="Thickness" >
-                                <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
-                                <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
-                            </OnIdiom>
-                        </StackLayout.Padding>
+                                            <StackLayout Orientation="Vertical" Margin="0,0,0,20">
+                                                <StackLayout Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Orientation="Horizontal">
+                                                    <ff:CachedImage Source="{Binding profilePic}" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
+                                                        <ff:CachedImage.Transformations>
+                                                            <ffTrans:CircleTransformation />
+                                                        </ff:CachedImage.Transformations>
+                                                    </ff:CachedImage>
+                                                    <Label x:Name="lblUserName" Text="{Binding userName}"  VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
+                                                </StackLayout>
+                                                <yummy:PancakeView CornerRadius="20"
+                                                        HasShadow="True"
+                                                        HeightRequest="275"
+                                                        WidthRequest="350"
+                                                        VerticalOptions="CenterAndExpand"
+                                                        Elevation="1">
+                                                    <Image Source="{Binding postPicture}"/>
+                                                </yummy:PancakeView>
+                                                <Label x:Name="lblDatePosted"/>
+                                            </StackLayout>
 
-                        <StackLayout Grid.Row="0" Grid.ColumnSpan="1" Grid.Column="0" Orientation="Horizontal">
-
-                            <ff:CachedImage Source="user1profile.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="Start">
-                                <ff:CachedImage.Transformations>
-                                    <ffTrans:CircleTransformation />
-                                </ff:CachedImage.Transformations>
-                            </ff:CachedImage>
-                            <Label Text="user1" VerticalOptions="Center" Margin="100,0,100,0" FontSize="20"/>
-                        </StackLayout>
-
-                        <yummy:PancakeView CornerRadius="20"
-                               HasShadow="True"
-                               HeightRequest="275"
-                               WidthRequest="350"
-                               VerticalOptions="CenterAndExpand"
-                               Elevation="1">
-                            <Image Source="user1profile.png"/>
-                        </yummy:PancakeView>
-                        <BoxView x:Name="boxViewPostDivider" HorizontalOptions="FillAndExpand" HeightRequest="1" />
-                    </StackLayout>
+                                        </StackLayout>
+                                    </ContentView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                    <Button x:Name="addPost" BorderColor="Black" BackgroundColor="LightGray" Text="AddPost" FontSize="12" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,10,0" Clicked="addPostForm"/>
                 </StackLayout>
+            </StackLayout>
 
+
+            <ScrollView>
+                <StackLayout x:Name="addpostLayout" IsVisible="False" IsEnabled="True">
+                    <StackLayout.Padding>
+                        <OnIdiom x:TypeArguments="Thickness" >
+                            <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                            <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
+                        </OnIdiom>
+                    </StackLayout.Padding>
+
+                    <Picker x:Name="pickerCLothType" Title="Cloth Type" TitleColor="LightGray" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Shirt</x:String>
+                                <x:String>Pant</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <StackLayout>
+                        <Button Text="Pick Photo" Clicked="pickPhotoButton" />
+                        <Image x:Name="pickPhotoImage" Source="pickPhotoButton"/>
+                        <!-- <Image> <Image.Source> <FIleImageSourse File ="{Binding someImage} -->
+                    </StackLayout>
+
+                    <StackLayout>
+                        <Entry x:Name="entryColor" Placeholder="Color" PlaceholderColor="LightGray" TextColor="White"/>
+                        <Entry x:Name="entryMaterial" Placeholder="Material" PlaceholderColor="LightGray" TextColor="White"/>
+                    </StackLayout>
+
+                    <Picker x:Name="pickerSeason" Title="Season" TitleColor="LightGray" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>Winter</x:String>
+                                <x:String>Spring</x:String>
+                                <x:String>Summer</x:String>
+                                <x:String>Fall</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+
+                    <StackLayout>
+                        <Entry x:Name="entryPrice" Placeholder="Price" PlaceholderColor="LightGray" TextColor="White"/>
+                        <Entry x:Name="entryUrl" Placeholder="URL" PlaceholderColor="LightGray" TextColor="White"/>
+                        <Label Text="Is Model Present" FontSize="Medium" TextColor="White"/>
+                        <Switch x:Name="switchModel" IsToggled="True" OnColor="DarkOrange"/>
+                        <Button x:Name="btnCreatePost" Text="CreatePost"  />
+                        <!--Clicked="createPost"-->
+                    </StackLayout>
+
+               
+
+            </StackLayout>
             </ScrollView>
-            <Button x:Name="addPost" BorderColor="Black" BackgroundColor="LightGray" Text="AddPost" FontSize="12" VerticalOptions="End" HorizontalOptions="End" Margin="0,0,10,0"/>
 
 
         </StackLayout>
-
-
     </ContentPage.Content>
+        
+    
 
 </ContentPage>

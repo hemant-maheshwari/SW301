@@ -26,6 +26,23 @@ namespace PocketClosetWebServiceAPI.Controllers
             return saveCloth(cloth, "create");
         }
 
+        [Route("createNew")]
+        [HttpPost]
+        public JsonResult createNewCloth([FromBody] Cloth cloth)
+        {
+            Response response = new Response();
+            ClothDataHandler clothDataHandler = new ClothDataHandler(config);
+            clothDataHandler.userId = cloth.userId;
+            clothDataHandler.clothType = cloth.clothType;
+            clothDataHandler.clothPicture = cloth.clothPicture;
+            clothDataHandler.color = cloth.color;
+            clothDataHandler.material = cloth.material;
+            clothDataHandler.season = cloth.season;
+            cloth = clothDataHandler.createNewCloth();
+            response.data = JsonConvert.SerializeObject(cloth);
+            return Json(response);
+        }
+
         [Route("getAll/{userId}")]
         [HttpGet]
         public JsonResult getAllClothes(int userId)

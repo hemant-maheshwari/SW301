@@ -11,5 +11,6 @@ namespace PocketClosetWebServiceAPI.Handlers
         bool createPost();
         Post getPost(int postId);
         List<Post> getAllPosts(int userId);
+        Post createNewPost();
     }
 }

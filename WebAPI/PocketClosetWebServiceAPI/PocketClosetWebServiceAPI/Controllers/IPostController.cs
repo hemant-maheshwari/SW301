@@ -12,6 +12,7 @@ namespace PocketClosetWebServiceAPI.Controllers
         JsonResult createPost(Post post);
         JsonResult getPost(int postId);
         JsonResult getAllPosts(int userId);
+        JsonResult createNewPost(Post post);
 
     }
 }

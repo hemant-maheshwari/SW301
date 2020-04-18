@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -15,18 +15,20 @@
     <PackageReference Include="font-awesome" Version="4.7.0" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="SkiaSharp" Version="1.68.1.1" />
-    <PackageReference Include="SkiaSharp.Views" Version="1.68.1.1" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.1.1" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0007" />
+    <PackageReference Include="SkiaSharp" Version="1.68.2-preview.60" />
+    <PackageReference Include="SkiaSharp.Views" Version="1.68.2-preview.60" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.68.2-preview.60" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.2.20160.6" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
-    <PackageReference Include="Xamarin.Forms" Version="4.5.0.530" />
+    <PackageReference Include="Xamarin.Forms" Version="4.6.0.616-pre4" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
-    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.3.7" />
-    <PackageReference Include="Xamarin.Plugin.SharedTransitions" Version="2.0.2" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="1.4.1-beta" />
   </ItemGroup>
 
   <ItemGroup>

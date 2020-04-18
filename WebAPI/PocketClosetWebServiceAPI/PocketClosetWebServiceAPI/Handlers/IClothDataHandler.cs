@@ -12,5 +12,6 @@ namespace PocketClosetWebServiceAPI.Handlers
         bool updateCloth();
         Cloth getCloth(int clothId);
         List<Cloth> getAllClothes(int userId);
+        Cloth createNewCloth();
     }
 }

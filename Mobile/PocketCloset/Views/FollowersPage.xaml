@@ -13,7 +13,7 @@
             
                 <StackLayout x:Name="activitySpinnerFollowerLayout" IsVisible="False" IsEnabled="False">
                     <ActivityIndicator x:Name="followerLoader" Color="DarkOrange" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
-                    <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
+                    <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="Large" VerticalTextAlignment="End"/>
                 </StackLayout>
 
 
@@ -25,7 +25,7 @@
                     <BoxView x:Name="boxViewFollower" WidthRequest ="200" HeightRequest="2"/>
                 </StackLayout>
             <StackLayout Orientation="Vertical" x:Name="followerLayout"  IsVisible="True" IsEnabled="True" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
-                <ListView x:Name="followersListView" ItemTapped="followerListItemTapped">
+                <ListView x:Name="followersListView" ItemTapped="followerListItemTapped" HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -33,10 +33,10 @@
                                         <StackLayout>
                                             <StackLayout Orientation="Vertical" Margin="0,0,0,20">
                                                 <Label x:Name="lblUserId" Text="{Binding userId}" IsVisible="False"/>
-                                                <Label x:Name="lblUserName" Text="{Binding userName}" TextColor="White" FontSize="15"/>
+                                                <Label x:Name="lblUserName" Text="{Binding userName}" TextColor="White" FontSize="Medium"/>
                                             <StackLayout Orientation="Horizontal">
-                                                <Label x:Name="lblLirstName" Text="{Binding firstName}"  TextColor="White" FontSize="10"/>
-                                                <Label x:Name="lblLastName" Text="{Binding lastName}"  TextColor="White" FontSize="10"/>
+                                                <Label x:Name="lblLirstName" Text="{Binding firstName}"  TextColor="White" FontSize="Small"/>
+                                                <Label x:Name="lblLastName" Text="{Binding lastName}"  TextColor="White" FontSize="Small"/>
                                             </StackLayout>
                                             </StackLayout>
                                         </StackLayout>

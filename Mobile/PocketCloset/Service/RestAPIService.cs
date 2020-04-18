@@ -29,6 +29,20 @@ namespace PocketCloset.Service
             return user;
         }
 
+        private Cloth getClothFromResponse(Response response) {
+            string clothString = response.data;
+            Cloth cloth = JsonConvert.DeserializeObject<Cloth>(clothString);
+            return cloth;
+        }
+
+        private Post getPostFromResponse(Response response)
+        {
+            string postString = response.data;
+            Post post = JsonConvert.DeserializeObject<Post>(postString);
+            return post;
+        }
+
+        
 
         public async Task<bool> checkUsernameAsync(string username)
         {
@@ -114,6 +128,41 @@ namespace PocketCloset.Service
             {
                 Debug.WriteLine("Error Occured!");
                 return default(List<FollowViewModel>);
+            }
+        }
+
+        public async Task<Cloth> createCloth(Cloth cloth) {
+            string url = WEB_API_BASE_URL + "cloth/createNew/";
+            var json = JsonConvert.SerializeObject(cloth);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getClothFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(Cloth);
+            }
+        }
+
+        public async Task<Post> createPost(Post post)
+        {
+            string url = WEB_API_BASE_URL + "post/createNew/";
+            var json = JsonConvert.SerializeObject(post);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await httpClient.PostAsync(url, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getPostFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(Post);
             }
         }
     }
