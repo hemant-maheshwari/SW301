@@ -42,18 +42,18 @@
                                HeightRequest="300"
                                WidthRequest="350"
                                 Elevation="1">
-                            <Image Source="user1profile.png" />
+                            <Image x:Name="img_shirt" Source="shirt.png" />
                         </yummy:PancakeView>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
                         <StackLayout>
-                            <ImageButton Source ="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
+                            <ImageButton x:Name="btnAddShirt" Clicked="uploadShirt" Source ="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
                             <Label Text="Add Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
                         </StackLayout>
                         <StackLayout>
-                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000"/>
-                            <Label Text="Save Shirt" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
+                            <ImageButton Source="saveIcon.png" Clicked="saveOutfit" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000"/>
+                            <Label Text="Save Outfit" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
                         </StackLayout>
                     </StackLayout>
 
@@ -67,18 +67,14 @@
                                HeightRequest="300"
                                WidthRequest="350"
                                Elevation="1">
-                            <Image Source="user1profile.png"/>
+                            <Image x:Name="img_pant" Source="pant.png"/>
                         </yummy:PancakeView>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical">
                         <StackLayout>
-                            <ImageButton Source="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
+                            <ImageButton x:Name="btnAddPant" Clicked="uploadPant" Source="addIcon.png" WidthRequest="40" HeightRequest="40" BorderColor="Black" CornerRadius="2000" BackgroundColor="Transparent"/>
                             <Label Text="Add Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
-                        </StackLayout>
-                        <StackLayout>
-                            <ImageButton Source="saveIcon.png" WidthRequest="40" HeightRequest="40" BackgroundColor="Transparent" CornerRadius="2000"/>
-                            <Label Text="Save Pants" TextColor="Black" BackgroundColor="Transparent" Margin="20,0,0,0"/>
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

@@ -19,17 +19,17 @@
             </StackLayout.Padding>
          
             <Label x:Name="lblUsername" Text="Username" HorizontalTextAlignment="Center" Margin="0,15,0,0" FontSize="25" TextColor="White"/>
-            <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" >
+            <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="Center">
             </StackLayout>
-            <StackLayout x:Name="ProfilePicture" Orientation="Horizontal" Spacing="30" HorizontalOptions="Center">
-                <Image x:Name="ProfilePic" Aspect="AspectFit" Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
-                <Grid ColumnSpacing="20">
-                    <Label x:Name="lblPostsCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="lblFollowersCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="1"/>
-                    <Label x:Name="lblFollowingCount" Text="0" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+            <StackLayout Orientation="Horizontal" Spacing="30"  HorizontalOptions="CenterAndExpand">
+                <ImageButton x:Name="profilePic" Clicked="uploadProfilePicture" Aspect="AspectFit" BackgroundColor="Transparent"  Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
+                <Grid ColumnSpacing="25" >
+                    <Label x:Name="lblPostsCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="lblFollowersCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="1"/>
+                    <Label x:Name="lblFollowingCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="2"/>
                     <Label x:Name="lblPosts" Text="POSTS" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="Caption" Margin="0,15,0,0" Grid.Row="1" Grid.Column="0"/>
-                    <Button x:Name="btnFollowers" Text="Followers" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="1" Margin="-35,0,0,30" Clicked="goToFollowersPage"/>
-                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="Caption" Grid.Row="1" Grid.Column="2" Margin="-35,0,0,30" Clicked="goToFollowingPage"/>
+                    <Button x:Name="btnFollowers" Text="Follower" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="1" Margin="-40,0,0,35" Clicked="goToFollowersPage"/>
+                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="2" Margin="-40,0,0,35" Clicked="goToFollowingPage"/>
                 </Grid>
             </StackLayout>
             <StackLayout Margin="40, -10, 0 ,0">
@@ -39,15 +39,20 @@
                 <Button x:Name="btnEditProfile" Text="Edit Profile" Margin="30,0" Clicked="goToAccountPage"/>
             </StackLayout>
             <StackLayout>
-                <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="40,30" ColumnSpacing="5" RowSpacing="15">
-                    <Image x:Name="Pic1" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="0"/>
-                    <Image x:Name="Pic2" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="1"/>
-                    <Image x:Name="Pic3" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="2"/>
-                    <Image x:Name="Pic4" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="0"/>
-                    <Image x:Name="Pic5" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="1"/>
-                    <Image x:Name="Pic6" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="2"/>
-                    <Image x:Name="Pic7" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="0"/>
-                    <Image x:Name="Pic8" Aspect="AspectFit" Source="stock.jpg" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="1"/>
+                <Grid x:Name="pictureGrid" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="40,30" ColumnSpacing="5" RowSpacing="15">
+                    <Image x:Name="pic1Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="0"/>
+                    <Image x:Name="pic1Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="0"/>
+                    <Image x:Name="pic2Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="1"/>
+                    <Image x:Name="pic2Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="1"/>
+                    <Image x:Name="pic3Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="2"/>
+                    <Image x:Name="pic3Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="2"/>
+                    <Image x:Name="pic4Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="0"/>
+                    <Image x:Name="pic4Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="0"/>
+                    <Image x:Name="pic5Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="1"/>
+                    <Image x:Name="pic5Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="1"/>
+                    <Image x:Name="pic6Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="2"/>
+                    <Image x:Name="pic6Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="2"/>
+                    
                 </Grid> 
             </StackLayout>
         </StackLayout>

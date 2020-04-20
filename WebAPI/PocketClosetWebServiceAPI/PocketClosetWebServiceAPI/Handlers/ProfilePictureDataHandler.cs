@@ -63,7 +63,7 @@ namespace PocketClosetWebServiceAPI.Handlers
         {
             ProfilePicture profilePicture = new ProfilePicture();
             profilePicture.userId = Int32.Parse(reader["user_id"].ToString());
-            profilePicture.profilePicture = Encoding.ASCII.GetBytes(reader["profile_picture"].ToString());
+            profilePicture.profilePicture = Encoding.UTF8.GetString((byte[])reader["profile_picture"]);
             return profilePicture;
         }
 

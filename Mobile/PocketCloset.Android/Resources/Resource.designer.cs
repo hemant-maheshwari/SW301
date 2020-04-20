@@ -13509,37 +13509,43 @@ namespace PocketCloset.Droid
 			public const int notify_panel_notification_icon_bg = 2131165315;
 			
 			// aapt resource value: 0x7F070084
-			public const int Prev = 2131165316;
+			public const int pant = 2131165316;
 			
 			// aapt resource value: 0x7F070085
-			public const int profileIcon = 2131165317;
+			public const int Prev = 2131165317;
 			
 			// aapt resource value: 0x7F070086
-			public const int saveIcon = 2131165318;
+			public const int profileIcon = 2131165318;
 			
 			// aapt resource value: 0x7F070087
-			public const int searchIcon = 2131165319;
+			public const int saveIcon = 2131165319;
 			
 			// aapt resource value: 0x7F070088
-			public const int settingsIcon = 2131165320;
+			public const int searchIcon = 2131165320;
 			
 			// aapt resource value: 0x7F070089
-			public const int tooltip_frame_dark = 2131165321;
+			public const int settingsIcon = 2131165321;
 			
 			// aapt resource value: 0x7F07008A
-			public const int tooltip_frame_light = 2131165322;
+			public const int shirt = 2131165322;
 			
 			// aapt resource value: 0x7F07008B
-			public const int Up = 2131165323;
+			public const int tooltip_frame_dark = 2131165323;
 			
 			// aapt resource value: 0x7F07008C
-			public const int user1profile = 2131165324;
+			public const int tooltip_frame_light = 2131165324;
 			
 			// aapt resource value: 0x7F07008D
-			public const int user2profile = 2131165325;
+			public const int Up = 2131165325;
 			
 			// aapt resource value: 0x7F07008E
-			public const int user3profile = 2131165326;
+			public const int user1profile = 2131165326;
+			
+			// aapt resource value: 0x7F07008F
+			public const int user2profile = 2131165327;
+			
+			// aapt resource value: 0x7F070090
+			public const int user3profile = 2131165328;
 			
 			static Drawable()
 			{

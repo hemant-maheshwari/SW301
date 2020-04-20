@@ -14,5 +14,7 @@ namespace PocketClosetWebServiceAPI.Controllers
         JsonResult deleteOutfit(int outfitId);
         JsonResult getOutfit(int outfitId);
         JsonResult getAllOutfits(int userId);
+
+        JsonResult getOutfits(int userId);
     }
 }

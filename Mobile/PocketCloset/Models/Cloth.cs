@@ -16,6 +16,11 @@ namespace PocketCloset.Models
             this.season = season;
         }
 
+        public Cloth(int userId, string clothPicture) {
+            this.userId = userId;
+            this.clothPicture = clothPicture;
+        }
+
         public int clothId { get; set; }
         public int userId { get; set; }
         public string clothType { get; set; }

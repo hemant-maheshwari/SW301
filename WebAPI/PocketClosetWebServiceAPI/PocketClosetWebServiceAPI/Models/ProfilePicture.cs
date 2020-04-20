@@ -8,7 +8,7 @@ namespace PocketCloset.Models
         }
 
         public int userId { get; set; }
-        public byte[] profilePicture { get; set; }
+        public string profilePicture { get; set; }
 
     }
 }

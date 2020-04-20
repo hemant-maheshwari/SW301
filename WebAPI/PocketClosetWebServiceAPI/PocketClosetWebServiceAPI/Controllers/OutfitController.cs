@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using PocketCloset.Models;
 using PocketClosetWebServiceAPI.Handlers;
 using PocketClosetWebServiceAPI.Models;
+using PocketClosetWebServiceAPI.ViewModels;
 
 namespace PocketClosetWebServiceAPI.Controllers
 {
@@ -66,9 +67,9 @@ namespace PocketClosetWebServiceAPI.Controllers
             Response response = new Response();
             OutfitDataHandler outfitDataHandler = new OutfitDataHandler(config);
             outfitDataHandler.outfitId = outfit.outfitId;
-            outfitDataHandler.outfitId = outfit.outfitId;
-            outfitDataHandler.outfitId = outfit.outfitId;
-            outfitDataHandler.outfitId = outfit.outfitId;
+            outfitDataHandler.outfitName = outfit.outfitName;
+            outfitDataHandler.clothId = outfit.clothId;
+            outfitDataHandler.userId = outfit.userId;
             if (command.Equals("create")) {
                 response.status = outfitDataHandler.createOutfit();
             }
@@ -98,6 +99,26 @@ namespace PocketClosetWebServiceAPI.Controllers
                 response.message = ex.Message;
             }
             return Json(response);            
+        }
+
+        [Route("getOutfits/{userId}")]
+        [HttpGet]
+        public JsonResult getOutfits(int userId)
+        {
+            Response response = new Response();
+            try
+            {
+                OutfitDataHandler outfitDataHandler = new OutfitDataHandler(config);
+                response.status = true;
+                List<OutfitViewModel> outfits = outfitDataHandler.getOutfits(userId);
+                response.data = JsonConvert.SerializeObject(outfits);                
+            }
+            catch (Exception ex)
+            {
+                response.status = false;
+                response.message = ex.Message;
+            }
+            return Json(response);
         }
     }
 }

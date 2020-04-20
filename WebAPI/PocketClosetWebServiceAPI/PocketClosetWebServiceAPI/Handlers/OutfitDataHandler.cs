@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using PocketCloset.Models;
+using PocketClosetWebServiceAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PocketClosetWebServiceAPI.Handlers
@@ -30,7 +32,7 @@ namespace PocketClosetWebServiceAPI.Handlers
             MySqlCommand mySqlCommand = new MySqlCommand();
             try
             {
-                string clothListString = getCommaSepearatedStringFromList(this.clothList);
+                //string clothListString = getCommaSepearatedStringFromList(this.clothList);
                 conn.Open();    //opening DB connection
                 mySqlCommand.Connection = conn;
                 mySqlCommand.CommandText = "delete_outfit";
@@ -94,9 +96,16 @@ namespace PocketClosetWebServiceAPI.Handlers
             Outfit outfit = new Outfit();
             outfit.outfitId = Int32.Parse(reader["outfit_id"].ToString());
             outfit.userId = Int32.Parse(reader["user_id"].ToString());
-            outfit.clothList = getListFromCommaSeperatedString(reader["cloth_list"].ToString());
+            outfit.clothId = Int32.Parse(reader["cloth_list"].ToString());
             outfit.outfitName = reader["outfit_name"].ToString();
             return outfit;
+        }
+
+        private OutfitViewModel getOutfitViewModelFromReader(MySqlDataReader reader) {
+            OutfitViewModel outfitViewModel = new OutfitViewModel();
+            outfitViewModel.outfitName = reader["outfit_name"].ToString();
+            outfitViewModel.clothPicString = Encoding.UTF8.GetString((byte[])reader["cloth_picture"]);
+            return outfitViewModel;
         }
 
         public Outfit getOutfit(int outfitId)
@@ -141,7 +150,7 @@ namespace PocketClosetWebServiceAPI.Handlers
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand mySqlCommand = new MySqlCommand();
             try{
-                string clothListString = getCommaSepearatedStringFromList(this.clothList);
+                //string clothListString = getCommaSepearatedStringFromList(this.clothList);
                 conn.Open();    //opening DB connection
                 mySqlCommand.Connection = conn;
                 mySqlCommand.CommandText = command;
@@ -149,7 +158,7 @@ namespace PocketClosetWebServiceAPI.Handlers
                 mySqlCommand.Parameters.Add(new MySqlParameter("_outfit_id", this.outfitId));
                 mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", this.userId));
                 mySqlCommand.Parameters.Add(new MySqlParameter("_outfit_name", this.outfitName));
-                mySqlCommand.Parameters.Add(new MySqlParameter("_cloth_list", clothListString));
+                mySqlCommand.Parameters.Add(new MySqlParameter("_cloth_id", this.clothId));
                 mySqlCommand.Parameters.Add(new MySqlParameter("_response", 0));
                 mySqlCommand.Parameters["_response"].Direction = ParameterDirection.Output;
                 mySqlCommand.ExecuteNonQuery();
@@ -185,5 +194,35 @@ namespace PocketClosetWebServiceAPI.Handlers
             return stringList;
         }
 
+        public List<OutfitViewModel> getOutfits(int userId)
+        {
+            string connectionString = config.GetConnectionString("DefaultConnection");
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand mySqlCommand = new MySqlCommand();
+            List<OutfitViewModel> outfits = new List<OutfitViewModel>();
+            try
+            {
+                conn.Open();    //opening DB connection
+                mySqlCommand.Connection = conn;
+                mySqlCommand.CommandText = "get_outfits";
+                mySqlCommand.CommandType = CommandType.StoredProcedure;
+                mySqlCommand.Parameters.Add(new MySqlParameter("_user_id", userId));
+                MySqlDataReader reader = mySqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    OutfitViewModel outfit = getOutfitViewModelFromReader(reader);
+                    outfits.Add(outfit);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                conn.Close();           //closing DB connection
+            }
+            return outfits;
+        }
     }
 }

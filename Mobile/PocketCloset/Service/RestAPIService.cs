@@ -55,6 +55,13 @@ namespace PocketCloset.Service
             return followViewModelArray.ToList<FollowViewModel>();
         }
 
+        private List<OutfitViewModel> getOutfitViewModelsFromResponse(Response response)
+        {
+            string listString = response.data;
+            OutfitViewModel[] outfitViewModelArray = JsonConvert.DeserializeObject<OutfitViewModel[]>(listString);
+            return outfitViewModelArray.ToList<OutfitViewModel>();
+        }
+
         public async Task<bool> checkUsernameAsync(string username)
         {
             string url = WEB_API_BASE_URL + "user/check/" + username;
@@ -186,5 +193,21 @@ namespace PocketCloset.Service
                 return default(List<FeedViewModel>);
             }
         }
+
+        public async Task<List<OutfitViewModel>> getOutfits(int userId) {
+            string url = WEB_API_BASE_URL + "outfit/getOutfits/" + userId;
+            HttpResponseMessage response = await httpClient.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                Response responseObject = await getHTTPResponse(response);
+                return getOutfitViewModelsFromResponse(responseObject);
+            }
+            else
+            {
+                Debug.WriteLine("Error Occured!");
+                return default(List<OutfitViewModel>);
+            }
+        }
+
     }
 }
