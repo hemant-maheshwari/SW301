@@ -19,7 +19,14 @@
 
 
             <StackLayout x:Name="feedPage" IsVisible="True" IsEnabled="True">
-                <StackLayout x:Name="feedLayout" IsVisible="True" IsEnabled="True">
+                <StackLayout Orientation="Horizontal">
+                    <Image x:Name="LoginIcon" Source="LoginIcon.png" HeightRequest="60"  Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
+                    <Label Text="Following"  Margin="12,15,0,0" FontAttributes="Bold" FontSize="Large" TextColor="White" FontFamily="MS Gothic"  />
+                </StackLayout>
+                <StackLayout x:Name="Welcome4" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
+                    <BoxView x:Name="boxViewFollowing1" WidthRequest ="200" HeightRequest="2"/>
+                </StackLayout>
+                <StackLayout x:Name="feedLayout" IsVisible="True" IsEnabled="True" >
                     <ListView x:Name="feedListView" HasUnevenRows="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
@@ -55,13 +62,20 @@
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
-                    <Button x:Name="addPost" BorderColor="Black" BackgroundColor="LightGray" Text="AddPost" FontSize="12" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,0,10,0" Clicked="addPostForm"/>
+                    
                 </StackLayout>
             </StackLayout>
 
 
             <ScrollView>
                 <StackLayout x:Name="addpostLayout" IsVisible="False" IsEnabled="True">
+                    <StackLayout Orientation="Horizontal">
+                        <Image x:Name="Icon" Source="LoginIcon.png" HeightRequest="60"  Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
+                        <Label Text="Following"  Margin="12,15,0,0" FontAttributes="Bold" FontSize="Large" TextColor="White" FontFamily="MS Gothic"  />
+                    </StackLayout>
+                    <StackLayout x:Name="Welcome5" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
+                        <BoxView x:Name="boxViewFollowing2" WidthRequest ="200" HeightRequest="2"/>
+                    </StackLayout>
                     <StackLayout.Padding>
                         <OnIdiom x:TypeArguments="Thickness" >
                             <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
@@ -81,7 +95,7 @@
                     <StackLayout>
                         <Button Text="Pick Photo" Clicked="pickPhotoButton" />
                         <Image x:Name="pickPhotoImage" Source="pickPhotoButton"/>
-                        <!-- <Image> <Image.Source> <FIleImageSourse File ="{Binding someImage} -->
+                      
                     </StackLayout>
 
                     <StackLayout>
@@ -113,7 +127,7 @@
 
             </StackLayout>
             </ScrollView>
-
+            <Button x:Name="addPost" BorderColor="Black" BackgroundColor="LightGray" Text="AddPost" FontSize="12" VerticalOptions="End" HorizontalOptions="CenterAndExpand" Margin="0,100,10,0" Clicked="addPostForm"/>
 
         </StackLayout>
     </ContentPage.Content>

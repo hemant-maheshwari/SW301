@@ -17,11 +17,11 @@ namespace PocketCloset.Controller
             restAPIService = new RestAPIService();
         }
 
-        public async Task<Post> createPost(Post post) {
+        public async Task<Post> createPost(Post post) { //getting a post from the rest api
             return await restAPIService.createPost(post);
         }
 
-        public async Task<List<FeedViewModel>> getAllFeeds(int userId) {
+        public async Task<List<FeedViewModel>> getAllFeeds(int userId) { //receiving a list of FeedViewModel
             return await restAPIService.getFeeds(userId);
         }
         

@@ -16,7 +16,7 @@ namespace PocketCloset.Controller
             restAPIService = new RestAPIService();
         }
 
-        public async Task<List<OutfitViewModel>> getOutfits(int userId) {
+        public async Task<List<OutfitViewModel>> getOutfits(int userId) { //receiving a list of outfitViewModel
             return await restAPIService.getOutfits(userId);
         }
     }

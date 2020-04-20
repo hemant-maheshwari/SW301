@@ -25,7 +25,7 @@ namespace PocketCloset.Service
             return await saveModelAsync(modelObject, ACTION_CREATE);
         }
 
-        public async Task<bool> deleteModelAsync(int searchId)
+        public async Task<bool> deleteModelAsync(int searchId)                  //deletes given object from database
         {
             string url = WEB_API_BASE_URL + getWebAPIControllerName() + FORWARD_SLASH + ACTION_DELETE + FORWARD_SLASH + searchId;
             try
@@ -49,7 +49,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<List<T>> getAllModelAsync(int searchId)
+        public async Task<List<T>> getAllModelAsync(int searchId)             //gets a list of all given object from web api
         {
             string url = WEB_API_BASE_URL + getWebAPIControllerName() + FORWARD_SLASH + ACTION_GET_ALL + FORWARD_SLASH + searchId;
             try
@@ -73,7 +73,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<T> getModelAsync(int searchId)
+        public async Task<T> getModelAsync(int searchId)                        //gets given object from web api
         {
             string url = WEB_API_BASE_URL + getWebAPIControllerName() + FORWARD_SLASH + ACTION_GET + FORWARD_SLASH + searchId;
             try
@@ -97,7 +97,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<bool> updateModelAsync(T modelObject)
+        public async Task<bool> updateModelAsync(T modelObject)                    //sends givenobject to eb api to be updated
         {
             return await saveModelAsync(modelObject, ACTION_UPDATE);
         }
@@ -116,7 +116,7 @@ namespace PocketCloset.Service
             return returnedModel;
         }
 
-        private List<T> getListModelFromResponse(Response response)
+        private List<T> getListModelFromResponse(Response response)     //gets list of given object from database
         {
             string userString = response.data;
             T[] returnedModel = JsonConvert.DeserializeObject<T[]>(userString);
@@ -124,7 +124,7 @@ namespace PocketCloset.Service
             return modelList;
         }
 
-        private string getWebAPIControllerName()
+        private string getWebAPIControllerName()                                //gets web api controller name
         {
             string[] fullNameArray = typeof(T).ToString().ToLower().Split('.');
             string tmpControllerName = fullNameArray[fullNameArray.Length - 1];
@@ -144,7 +144,7 @@ namespace PocketCloset.Service
             return controllerName;
         }
 
-        private async Task<bool> saveModelAsync(T modelObject, string methodName)
+        private async Task<bool> saveModelAsync(T modelObject, string methodName)         //saves given object to database
         {
             string url = WEB_API_BASE_URL + getWebAPIControllerName() + FORWARD_SLASH + methodName;
             try

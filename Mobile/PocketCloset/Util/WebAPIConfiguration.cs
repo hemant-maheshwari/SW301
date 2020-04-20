@@ -7,8 +7,8 @@ namespace PocketCloset.Util
 {
     public class WebAPIConfiguration
     {
-        protected static string IP = "192.168.1.151";
-        protected static string PORT = "45462";
+        protected static string IP = "10.246.16.24";
+        protected static string PORT = "45455";
         protected static string WEB_API_BASE_URL = "https://" + IP + ":" + PORT + "/v1/api/";
         protected static string HOSTNAME = "CN=" + IP;
         protected static string LOCALHOST = "CN=localhost";
@@ -22,7 +22,7 @@ namespace PocketCloset.Util
             httpClient = new HttpClient(handler);
         }
 
-        public HttpClientHandler getInsecureHandler()
+        public HttpClientHandler getInsecureHandler()                       // checks to see if http service is secure
         {
             var handler = new HttpClientHandler();
             handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>

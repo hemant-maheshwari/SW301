@@ -14,13 +14,13 @@ namespace PocketCloset.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NavPage : TabbedPage
     {
-        public NavPage(User user)
+        public NavPage(User user) // initializes the construction of page with user
         {
             Application.Current.Properties[CommonSettings.GLOBAL_USER] = user;
             InitializeComponent();
             Init();
         }
-        public void Init()
+        public void Init() // initilaize screen components
         {
             BackgroundColor = Constants.backgroundColor;
 

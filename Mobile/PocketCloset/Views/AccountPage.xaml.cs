@@ -22,13 +22,13 @@ namespace PocketCloset.Views
             Init();
         }
 
-        void Init()
+        void Init()  //initializes the components of page
         {
             BackgroundColor = Constants.backgroundColor;
             boxViewAccountPage.Color = Constants.logoColor;
         }
 
-        protected override void OnAppearing()
+        protected override void OnAppearing() // brings user to page when clicked on
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;

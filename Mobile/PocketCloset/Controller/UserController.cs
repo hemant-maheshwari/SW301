@@ -16,17 +16,17 @@ namespace PocketCloset.Controller
             restAPIService = new RestAPIService();
         }
 
-        public async Task<bool> checkUsername(string username)
+        public async Task<bool> checkUsername(string username)   // makes call to ret api to check username
         {
             return await restAPIService.checkUsernameAsync(username);
         }
 
-        public async Task<User> checkUser(User user)
+        public async Task<User> checkUser(User user)   // makes call to ret api to check user
         {
             return await restAPIService.checkUserAsync(user);
         }
 
-        public async Task<User> getUserFromUsername(String username)
+        public async Task<User> getUserFromUsername(String username)    // makes call to ret api to get user
         {
             return await restAPIService.getUserFromUsernameAsync(username);
         }

@@ -36,12 +36,12 @@ namespace PocketCloset.Views
             secQuestion = new SecQuestion();
         }
 
-        public void goToLoginPage(object sender, EventArgs e)
+        public void goToLoginPage(object sender, EventArgs e) //takes user to login page
         {
             App.Current.MainPage = new LoginPage();
         }
 
-        public void verifyUsernameForm(object sender, EventArgs e)
+        public void verifyUsernameForm(object sender, EventArgs e) //verifies if username form was input correctly
         {
             if (entryUsername.Text == "" || entryUsername.Text == null)
             {
@@ -57,7 +57,7 @@ namespace PocketCloset.Views
         }
 
 
-        private async void checkExistingUsername()
+        private async void checkExistingUsername()  //sees if username exists in database already
         {
             try
             {
@@ -88,17 +88,17 @@ namespace PocketCloset.Views
             }
         }
 
-        private async Task<SecQuestion> getSecurityQuestion(int userId)
+        private async Task<SecQuestion> getSecurityQuestion(int userId) //gets security question from database based off of user id
         {
             return await secQuestionController.getModel(userId);
         }
 
-        private async Task<User> getUserFromUsername(string username)
+        private async Task<User> getUserFromUsername(string username)  //sends username to controller to get user
         {
             return await userController.getUserFromUsername(username);
         }
 
-        public void verifySecQuestionAnswerForm(object sender, EventArgs e)
+        public void verifySecQuestionAnswerForm(object sender, EventArgs e) //verifies if update password form was inputted correctly
         {
             if (entrySecQuestionAnswer.Text == null || entrySecQuestionAnswer.Text == "")
             {
@@ -119,7 +119,7 @@ namespace PocketCloset.Views
         }
 
 
-        public void verifyUpdatedPassword(object sender, EventArgs e)
+        public void verifyUpdatedPassword(object sender, EventArgs e)  //verifies if update password form was inputted correctly
         {
             if (entryNewPassword.Text == "" || entryNewPassword.Text == null)
             {
@@ -146,7 +146,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private async void updatePassword(string password)
+        private async void updatePassword(string password)  //sends updated password to user controller to be saved
         {
             user.password = password;
             try
@@ -175,13 +175,13 @@ namespace PocketCloset.Views
             }
         }
 
-        private bool passwordsMatch(string password, string confirmPassword)
+        private bool passwordsMatch(string password, string confirmPassword)  //checks to see if new password and confirm password match each other
         {
             return password.Equals(confirmPassword);
         }
 
 
-        private void isActivitySpinnerShowing(bool status)
+        private void isActivitySpinnerShowing(bool status) // displays/hides  activity spinner
         {
             if (status.Equals(true))
             {
@@ -200,7 +200,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isEnterUsernameLayoutShowing(bool status)
+        private void isEnterUsernameLayoutShowing(bool status)  // displays/hides enter username page
         {
             if (status.Equals(true))
             {
@@ -215,7 +215,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isUpdatePasswordLayoutShowing(bool status)
+        private void isUpdatePasswordLayoutShowing(bool status) // displays/hides update password page
         {
             if (status.Equals(true))
             {
@@ -230,7 +230,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isEnterSecQuestionLayoutShowing(bool status)
+        private void isEnterSecQuestionLayoutShowing(bool status) // displays/hides security question page
         {
             if (status.Equals(true))
             {

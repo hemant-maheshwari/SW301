@@ -15,54 +15,54 @@ namespace PocketCloset.Service
     public class RestAPIService : WebAPIConfiguration
     {
 
-        private async Task<Response> getHTTPResponse(HttpResponseMessage response)
+        private async Task<Response> getHTTPResponse(HttpResponseMessage response)   //get response object from http response
         {
             string result = await response.Content.ReadAsStringAsync();
             Response responseObject = JsonConvert.DeserializeObject<Response>(result);
             return responseObject;
         }
 
-        private User getUserFromResponse(Response response)
+        private User getUserFromResponse(Response response)     //get user object from response object
         {
             string userString = response.data;
             User user = JsonConvert.DeserializeObject<User>(userString);
             return user;
         }
 
-        private Cloth getClothFromResponse(Response response) {
+        private Cloth getClothFromResponse(Response response) {                ///get cloth object from response object
             string clothString = response.data;
             Cloth cloth = JsonConvert.DeserializeObject<Cloth>(clothString);
             return cloth;
         }
 
-        private Post getPostFromResponse(Response response)
+        private Post getPostFromResponse(Response response)                  //get post object from response object
         {
             string postString = response.data;
             Post post = JsonConvert.DeserializeObject<Post>(postString);
             return post;
         }
 
-        private List<FeedViewModel> getFeedViewModelsFromResponse(Response response) {
+        private List<FeedViewModel> getFeedViewModelsFromResponse(Response response) {                   //get list of feed view model from response object
             string feedsString = response.data;
             FeedViewModel[] models = JsonConvert.DeserializeObject<FeedViewModel[]>(feedsString);
             return models.ToList<FeedViewModel>();
         }
 
-        private List<FollowViewModel> getFollowViewModelsFromResponse(Response response)
+        private List<FollowViewModel> getFollowViewModelsFromResponse(Response response)                          //get list of follow view model from response object
         {
             string listString = response.data;
             FollowViewModel[] followViewModelArray = JsonConvert.DeserializeObject<FollowViewModel[]>(listString);
             return followViewModelArray.ToList<FollowViewModel>();
         }
 
-        private List<OutfitViewModel> getOutfitViewModelsFromResponse(Response response)
-        {
+        private List<OutfitViewModel> getOutfitViewModelsFromResponse(Response response)                              //get list of outfit view model from response object
+        { 
             string listString = response.data;
             OutfitViewModel[] outfitViewModelArray = JsonConvert.DeserializeObject<OutfitViewModel[]>(listString);
             return outfitViewModelArray.ToList<OutfitViewModel>();
         }
 
-        public async Task<bool> checkUsernameAsync(string username)
+        public async Task<bool> checkUsernameAsync(string username)           //checking to see if username exists  in database
         {
             string url = WEB_API_BASE_URL + "user/check/" + username;
             HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -78,7 +78,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<User> checkUserAsync(User user)
+        public async Task<User> checkUserAsync(User user)                            //checking to see if user exists  in database
         {
             string url = WEB_API_BASE_URL + "user/login/";
             var json = JsonConvert.SerializeObject(user);
@@ -96,7 +96,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<User> getUserFromUsernameAsync(string username)
+        public async Task<User> getUserFromUsernameAsync(string username)                  //receiving a user from webservice 
         {
             string url = WEB_API_BASE_URL + "user/validateUsername/" + username;
             HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -112,7 +112,7 @@ namespace PocketCloset.Service
             }
 
         }
-        public async Task<List<FollowViewModel>> getAllFollowersAsync(int userId)
+        public async Task<List<FollowViewModel>> getAllFollowersAsync(int userId)      //receiving a list of Follow view model from webservice 
         {
             string url = WEB_API_BASE_URL + "follower/getFollowers/" + userId;
             HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -128,7 +128,7 @@ namespace PocketCloset.Service
             }
         }
         
-        public async Task<List<FollowViewModel>> getAllFollowingAsync(int userId)
+        public async Task<List<FollowViewModel>> getAllFollowingAsync(int userId)     //receiving a list of Follow view model from webservice 
         {
             string url = WEB_API_BASE_URL + "follower/getFollowing/" + userId;
             HttpResponseMessage response = await httpClient.GetAsync(url);
@@ -144,7 +144,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<Cloth> createCloth(Cloth cloth) {
+        public async Task<Cloth> createCloth(Cloth cloth) {                //receiving a cloth from webservice 
             string url = WEB_API_BASE_URL + "cloth/createNew/";
             var json = JsonConvert.SerializeObject(cloth);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -161,7 +161,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<Post> createPost(Post post)
+        public async Task<Post> createPost(Post post)      //receiving a post from webservice 
         {
             string url = WEB_API_BASE_URL + "post/createNew/";
             var json = JsonConvert.SerializeObject(post);
@@ -179,7 +179,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<List<FeedViewModel>> getFeeds(int userId) {
+        public async Task<List<FeedViewModel>> getFeeds(int userId) {  //receiving a list feed view model from webservice 
             string url = WEB_API_BASE_URL + "post/getFeeds/" + userId;
             HttpResponseMessage response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -194,7 +194,7 @@ namespace PocketCloset.Service
             }
         }
 
-        public async Task<List<OutfitViewModel>> getOutfits(int userId) {
+        public async Task<List<OutfitViewModel>> getOutfits(int userId) { //receiving a list of outfit view model from webservice 
             string url = WEB_API_BASE_URL + "outfit/getOutfits/" + userId;
             HttpResponseMessage response = await httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)

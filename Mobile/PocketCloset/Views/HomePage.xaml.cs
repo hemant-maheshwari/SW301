@@ -34,8 +34,10 @@ namespace PocketCloset.Views
         public HomePage(){
             InitializeComponent();
             Init();
+            boxViewFollowing1.Color = Constants.logoColor;
+            boxViewFollowing2.Color = Constants.logoColor;
         }
-        protected async override void OnAppearing()
+        protected async override void OnAppearing() //populate feed with user posts
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
@@ -43,7 +45,7 @@ namespace PocketCloset.Views
             feedListView.ItemsSource = feeds;
            // isActivitySpinnerShowing(false);
         }
-        public void Init()
+        public void Init() //initilize screen components
         {
             BackgroundColor = Constants.backgroundColor;
             userController = new UserController();
@@ -53,13 +55,13 @@ namespace PocketCloset.Views
 
         }
 
-        private void addPostForm(object sender, EventArgs e)
+        private void addPostForm(object sender, EventArgs e) // button to add new post
          {
             feedPage.IsVisible = false;
             addpostLayout.IsVisible = true;
          }
         
-        public async void createPost(object sender, EventArgs e)
+        public async void createPost(object sender, EventArgs e) // creation of a new post with required fields
         {
             try {
                 string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
@@ -89,7 +91,7 @@ namespace PocketCloset.Views
                 Debug.WriteLine(ex.Message);
             }            
         }
-        public string imageToBase64()
+        public string imageToBase64() // converting image to base64
         {
            
             using (var image = File.OpenRead(imagePath))
@@ -105,11 +107,11 @@ namespace PocketCloset.Views
             }
         } 
 
-        public interface CameraInterface
+        public interface CameraInterface //interface for selecting picture
         {
             void BringUpPhotoGallery();
         }
-        public async void pickPhotoButton(object sender, EventArgs e)
+        public async void pickPhotoButton(object sender, EventArgs e) // selecting picture from camera roll
         {
             feedLayout.IsVisible = false;
             feedLayout.IsEnabled = false;

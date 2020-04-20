@@ -18,12 +18,12 @@ namespace PocketCloset.Controller
         {
             restAPIService = new RestAPIService();
         }
-        public async Task<List<FollowViewModel>> getAllFollowers(int userId)
+        public async Task<List<FollowViewModel>> getAllFollowers(int userId) //receiving a list of FollowViewModel
         {
             return await restAPIService.getAllFollowersAsync(userId);
            
         }
-        public async Task<List<FollowViewModel>> getAllFollowing(int userId)
+        public async Task<List<FollowViewModel>> getAllFollowing(int userId) //receiving a list of FollowViewModel
         {
             return await restAPIService.getAllFollowingAsync(userId);
            

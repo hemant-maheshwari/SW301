@@ -17,20 +17,21 @@ namespace PocketCloset.Views
     {
         private FollowerController followerController;
         private User user;
-        public FollowersPage()
+        public FollowersPage() 
         {
             InitializeComponent();
             Init();
         }
 
-        public void Init()
+        public void Init()  // initialize screen components
         {
             BackgroundColor = Constants.backgroundColor;
             LoginIcon.HeightRequest = Constants.LoginIconHeight;
             boxViewFollower.Color = Constants.logoColor;
             followerController = new FollowerController();
         }
-        public void goToHomePage(object sender, EventArgs e)
+        
+        public void goToHomePage(object sender, EventArgs e)  // navigattion to home page
         {
             App.Current.MainPage = new NavPage(user);
         }
@@ -39,14 +40,16 @@ namespace PocketCloset.Views
             // Application.Current.MainPage = new AccountPage(user);
         } 
            
-        protected async override void OnAppearing()
+        
+        protected async override void OnAppearing()  //shows what appear on screen and poupltaes posts
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
             List<FollowViewModel> followers = await followerController.getAllFollowers(user.userId);
             followersListView.ItemsSource = followers;
         }
-        public void isActivitySpinnerShowing(bool status)
+        
+        public void isActivitySpinnerShowing(bool status)  //determines the visibility activity spinner
         {
             if (status.Equals(true))
             {

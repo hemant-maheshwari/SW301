@@ -19,7 +19,7 @@ namespace PocketCloset.Views
             Init();
         }
 
-        public void Init()
+        public void Init()  //initalizes components for pages
         {
             BackgroundColor = Constants.backgroundColor;
             lblUsername.TextColor = Constants.initialScreensTextColor;
@@ -30,12 +30,12 @@ namespace PocketCloset.Views
             btnForgotPassword.TextColor = Constants.logoColor;
         }
 
-        public void goToSignUpPage(object sender, EventArgs e)
+        public void goToSignUpPage(object sender, EventArgs e) //takes uer to sign up page
         {
             App.Current.MainPage = new SignUpPage();
         }
 
-        public void verifyLoginForm(object sender, EventArgs e)
+        public void verifyLoginForm(object sender, EventArgs e) //verifies in login form was input correctly
         {
             if (entryUsername.Text == " " || entryUsername.Text == null)
             {
@@ -55,7 +55,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private async void signIn()
+        private async void signIn() //sends username and password to web api to see if account exists in database
         {
             User user = new User(entryUsername.Text, entryPassword.Text);
             try
@@ -84,12 +84,12 @@ namespace PocketCloset.Views
             }
         }
 
-        private async Task<User> checkUserExistence(User user)
+        private async Task<User> checkUserExistence(User user) //checks if user exists in database
         {
             return await userController.checkUser(user);
         }
 
-        private void isActivitySpinnerShowing(bool status)
+        private void isActivitySpinnerShowing(bool status) // displays/hides activity spinner
         {
             if (status.Equals(true))
             {
@@ -109,7 +109,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isSignInLayoutShowing(bool status)
+        private void isSignInLayoutShowing(bool status) //displays/hides sign in form
         {
             if (status.Equals(true))
             {
@@ -123,7 +123,7 @@ namespace PocketCloset.Views
             }
         }
 
-        public void goToForgotPasswordPage(object sender, EventArgs e)
+        public void goToForgotPasswordPage(object sender, EventArgs e) //takes user to forgot password page
         {
             App.Current.MainPage = new ForgotPasswordPage();
         }

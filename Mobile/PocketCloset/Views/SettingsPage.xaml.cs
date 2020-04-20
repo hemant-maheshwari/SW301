@@ -26,7 +26,7 @@ namespace PocketCloset.Views
             Init();
         }
 
-        public void Init()
+        public void Init()  //initializes components of page
         {
             BackgroundColor = Constants.backgroundColor;
             boxViewSettings.Color = Constants.logoColor;
@@ -35,25 +35,25 @@ namespace PocketCloset.Views
             userController = new UserController();
         }
 
-        private void initializeAccountInfo()
+        private void initializeAccountInfo()  //initializes settings form entries
         {
             entryAccFirstName.Text = user.firstName;
             entryAccLastName.Text = user.lastName;
             entryAccEmail.Text = user.email;
         }
-        protected override void OnAppearing()
+        protected override void OnAppearing()  //brings user data to page when clicked on
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
             initializeAccountInfo();
 
         }
-        public void logOut(object sender, EventArgs e)
+        public void logOut(object sender, EventArgs e) //returns user to login page
         {
             App.Current.MainPage = new LoginPage();
         }
 
-        public void updateUserForm(object sender, EventArgs e)
+        public void updateUserForm(object sender, EventArgs e)  //verifies if form entries were input correctly
         {
             if (entryAccFirstName.Text == " " || entryAccFirstName.Text == null)
             {
@@ -109,7 +109,7 @@ namespace PocketCloset.Views
 
         }
 
-        public async void updateUserAccount()
+        public async void updateUserAccount()  //sends user with new information to web api to be updated
         {
             user.updateUser(user.firstName, user.lastName, user.email, user.password);
             try
@@ -138,12 +138,12 @@ namespace PocketCloset.Views
 
         }
 
-        private bool passwordsMatch(string password, string confirmPassword)
+        private bool passwordsMatch(string password, string confirmPassword)    //checks to see if new password and confirm password match
         {
             return password.Equals(confirmPassword);
         }
 
-        private void isActivitySpinnerShowing(bool status)
+        private void isActivitySpinnerShowing(bool status)  // displays/hides activity spinner
         {
             if (status.Equals(true))
             {
@@ -165,7 +165,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isUpdateAccLayoutShowing(bool status)
+        private void isUpdateAccLayoutShowing(bool status) //displays /hides update account form
         {
             if (status.Equals(true))
             {

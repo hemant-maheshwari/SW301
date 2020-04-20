@@ -16,7 +16,7 @@ namespace PocketCloset.Controller
             restAPIService = new RestAPIService();
         }
 
-        public async Task<Cloth> createCloth(Cloth cloth) {
+        public async Task<Cloth> createCloth(Cloth cloth) { //receiving a cloth from rest api
             return await restAPIService.createCloth(cloth);
         }
 

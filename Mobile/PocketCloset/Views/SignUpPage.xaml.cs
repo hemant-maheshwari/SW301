@@ -24,7 +24,7 @@ namespace PocketCloset.Views
             InitializeComponent();
             Init();
         }
-        void Init()
+        void Init()  //initializes components of page
         {
             BackgroundColor = Constants.backgroundColor;
             btnSignIn.TextColor = Constants.logoColor;
@@ -37,7 +37,7 @@ namespace PocketCloset.Views
 
         }
 
-        public void verifyUserForm(object sender, EventArgs e)
+        public void verifyUserForm(object sender, EventArgs e)  //verifies if sign up form was input correctly
         {
             if (pickerUserType.SelectedItem == null)
             {
@@ -99,12 +99,12 @@ namespace PocketCloset.Views
             }
         }
 
-            private async Task<bool> checkUsernameExistence(string username)
+            private async Task<bool> checkUsernameExistence(string username) //makes a call to web api to see if new username exists in database already
         {
             return await userController.checkUsername(username);
         }
 
-        public async void createUserAccount()
+        public async void createUserAccount() //creates new user objects, sends to web api to create new user in database
         {
             User newUser = new User(pickerUserType.SelectedItem.ToString(), pickerGenderType.SelectedItem.ToString(), entryFirstName.Text, entryLastName.Text, datePickerDOB.Date.ToShortDateString(), entryEmail.Text, entryUsername.Text, entryPassword.Text);
             try
@@ -143,7 +143,7 @@ namespace PocketCloset.Views
             }
         }
 
-        public void verifySecQuestionForm(object sender, EventArgs e)
+        public void verifySecQuestionForm(object sender, EventArgs e)  //verifies if security question form was input correctly
         {
             if(entrySecQuestion.Text == "" || entrySecQuestion.Text == null)
             {
@@ -163,7 +163,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private async void createSecurityQuestion()
+        private async void createSecurityQuestion()  //creates security question object, sends to web api to be created in database
         {
             SecQuestion secQuestion = new SecQuestion(user.userId, entrySecQuestion.Text, entrySecQuestionAnswer.Text);
             try
@@ -190,7 +190,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isActivitySpinnerShowing(bool status)
+        private void isActivitySpinnerShowing(bool status)  // displays/hides activity spinner
         {
             if (status.Equals(true))
             {
@@ -210,7 +210,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isSignUpLayoutShowing(bool status)
+        private void isSignUpLayoutShowing(bool status) // displays/hides sign up form
         {
             if (status.Equals(true))
             {
@@ -226,7 +226,7 @@ namespace PocketCloset.Views
             }
         }
 
-        private void isSecQuestionLayoutShowing(bool status)
+        private void isSecQuestionLayoutShowing(bool status) //displays/hides sec question form
         {
             if (status.Equals(true))
             {
@@ -240,7 +240,7 @@ namespace PocketCloset.Views
             }
         }
 
-        public void goToLoginPage(object sender, EventArgs e)
+        public void goToLoginPage(object sender, EventArgs e) //returns user to login page
         {
             App.Current.MainPage = new LoginPage();
         }

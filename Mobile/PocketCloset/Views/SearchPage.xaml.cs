@@ -24,7 +24,7 @@ namespace PocketCloset.Views
             InitializeComponent();
             Init();
         }
-        public void Init()
+        public void Init() //initialize screen components
         {
             BackgroundColor = Constants.backgroundColor;
             userController = new UserController();
@@ -34,11 +34,11 @@ namespace PocketCloset.Views
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
         }
-        public void goToUserAccount(object sender, EventArgs e)
+        public void goToUserAccount(object sender, EventArgs e) //navigate to user account page
         {   
             Application.Current.MainPage = new AccountPage();
         }
-        public void searchButtonPressed(object sender, EventArgs e)
+        public void searchButtonPressed(object sender, EventArgs e) //function when search button is pressed
         {
             var keyword = searchPageBar.Text;
                
@@ -55,7 +55,7 @@ namespace PocketCloset.Views
             }
         }
         
-         private async void searchUser()
+         private async void searchUser() // searches database for matching user
         {
             isActivitySpinnerShowing(true);
             try
@@ -84,13 +84,13 @@ namespace PocketCloset.Views
             }
         }
 
-        private async Task<User> getUserFromUsername(string username)
+        private async Task<User> getUserFromUsername(string username) // calls for user from rest api
         {
             return await userController.getUserFromUsername(username);
         }
         
 
-        public void isActivitySpinnerShowing(bool status)
+        public void isActivitySpinnerShowing(bool status) //determines the visibility activity spinner
         {
             if (status.Equals(true))
             {
