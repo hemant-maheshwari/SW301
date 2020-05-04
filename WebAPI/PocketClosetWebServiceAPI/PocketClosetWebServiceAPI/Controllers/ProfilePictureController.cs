@@ -65,7 +65,7 @@ namespace PocketClosetWebServiceAPI.Controllers
         [HttpPost]
         public JsonResult updateProfilePicture([FromBody] ProfilePicture profilePicture)
         {
-            return saveProfilePicture(profilePicture, "create");
+            return saveProfilePicture(profilePicture, "update");
         }
 
         private JsonResult saveProfilePicture(ProfilePicture profilePicture, string command) {

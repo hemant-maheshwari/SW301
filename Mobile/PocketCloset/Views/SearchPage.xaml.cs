@@ -18,6 +18,7 @@ namespace PocketCloset.Views
     {
         private UserController userController;
         private User user;
+        private FollowerController followerController;
 
         public SearchPage()
         {
@@ -28,25 +29,22 @@ namespace PocketCloset.Views
         {
             BackgroundColor = Constants.backgroundColor;
             userController = new UserController();
+            followerController = new FollowerController();
         }
         protected override void OnAppearing()
         {
             base.OnAppearing();
             user = Application.Current.Properties[CommonSettings.GLOBAL_USER] as User;
         }
-        public void goToUserAccount(object sender, EventArgs e) //navigate to user account page
-        {   
-            Application.Current.MainPage = new AccountPage();
-        }
         public void searchButtonPressed(object sender, EventArgs e) //function when search button is pressed
         {
-            var keyword = searchPageBar.Text;
+            var keyword = followUserBar.Text;
                
             if (keyword.Length < 3 || keyword.Length > 20)
             {
                 isActivitySpinnerShowing(false);
                 DisplayAlert("Invalid Search", "Enter a valid UserName", "Okay");
-                searchPageBar.Focus();
+                followUserBar.Focus();
             }
             else 
             {
@@ -54,25 +52,42 @@ namespace PocketCloset.Views
                 searchUser();
             }
         }
-        
-         private async void searchUser() // searches database for matching user
+
+        public async void followUser(object sender, EventArgs e)  //add friend info sent to controller
+        {
+            string followeruserName = foundFriend.Text;
+            User friendUser = await userController.getUserFromUsername(followeruserName);
+            Follower follower = new Follower(user.userId, friendUser.userId);
+            bool flag = await followerController.createModel(follower);
+            if (flag)
+            {
+                isActivitySpinnerShowing(true);
+                await DisplayAlert("Message", "You now follow "+friendUser.firstName+ " "+friendUser.lastName, "Okay");
+                App.Current.MainPage = new NavPage(user);
+
+            }
+            else
+            {
+                await DisplayAlert("Message", "Error Occured", "Okay");
+                App.Current.MainPage = new NavPage(user);
+            }
+
+        }
+        private async void searchUser() // searches database for matching user
         {
             isActivitySpinnerShowing(true);
             try
             {
-                User foundUser = await getUserFromUsername(searchPageBar.Text);
+                User foundUser = await getUserFromUsername(followUserBar.Text);
                 if (foundUser != null)
                 {
                     isActivitySpinnerShowing(false);
-
-                    user = foundUser;
-                   
-                    searchSuggestions.Text = foundUser.username;
-                    searchSuggestions.IsVisible = true;
+                    foundFriend.Text = foundUser.username;
+                    foundFriend.IsVisible = true;
                 }
                 else
                 {
-                     await DisplayAlert("Message", "User not Found", "Okay");
+                    await DisplayAlert("Message", "User not Found", "Okay");
                     isActivitySpinnerShowing(false);
                 }
             }
@@ -94,8 +109,8 @@ namespace PocketCloset.Views
         {
             if (status.Equals(true))
             {
-                searchLayout.IsVisible = false;
-                searchLayout.IsEnabled = false;
+                followUserLayout.IsVisible = false;
+                followUserLayout.IsEnabled = false;
                 activitySpinnerSearchLayout.IsVisible = true;
                 searchLoader.IsVisible = true;
                 searchLoader.IsRunning = true;
@@ -106,8 +121,8 @@ namespace PocketCloset.Views
             if (status.Equals(false))
             {
                 activitySpinnerSearchLayout.IsVisible = false;
-                searchLayout.IsVisible = true;
-                searchLayout.IsEnabled = true;
+                followUserLayout.IsVisible = true;
+                followUserLayout.IsEnabled = true;
                 searchLoader.IsVisible = false;
                 searchLoader.IsRunning = false;
                 searchLoader.IsEnabled = false;

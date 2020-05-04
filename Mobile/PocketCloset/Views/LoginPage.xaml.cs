@@ -20,7 +20,7 @@ namespace PocketCloset.Views
         }
 
         public void Init()  //initalizes components for pages
-        {
+        { 
             BackgroundColor = Constants.backgroundColor;
             lblUsername.TextColor = Constants.initialScreensTextColor;
             lblPassword.TextColor = Constants.initialScreensTextColor;

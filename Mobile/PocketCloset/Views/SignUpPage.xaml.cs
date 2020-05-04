@@ -18,6 +18,7 @@ namespace PocketCloset.Views
     {
         private UserController userController;
         private SecQuestionController secQuestionController;
+        private ProfilePictureController profilePictureController;
         private User user;
         public SignUpPage()
         {
@@ -30,6 +31,7 @@ namespace PocketCloset.Views
             btnSignIn.TextColor = Constants.logoColor;
             userController = new UserController();
             secQuestionController = new SecQuestionController();
+            profilePictureController = new ProfilePictureController();
             user = new User();
             datePickerDOB.MaximumDate = DateTime.Today;
             isActivitySpinnerShowing(false);
@@ -115,6 +117,7 @@ namespace PocketCloset.Views
                     if (flag)
                     {
                         user = await userController.getUserFromUsername(newUser.username);
+                        createBlankProfilePicture();
                         isActivitySpinnerShowing(false);
                         isSignUpLayoutShowing(false);
                         isSecQuestionLayoutShowing(true);
@@ -161,6 +164,11 @@ namespace PocketCloset.Views
                 isActivitySpinnerShowing(true);
                 createSecurityQuestion();
             }
+        }
+
+        private async void createBlankProfilePicture() {
+            ProfilePicture profilePicture = new ProfilePicture(user.userId, " ");
+            await profilePictureController.createModel(profilePicture);
         }
 
         private async void createSecurityQuestion()  //creates security question object, sends to web api to be created in database

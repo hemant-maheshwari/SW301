@@ -10,6 +10,7 @@
     
     
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Orientation="Vertical">
             <StackLayout.Padding>
                 <OnIdiom x:TypeArguments="Thickness" >
@@ -22,14 +23,18 @@
                 <ActivityIndicator x:Name="searchLoader" Color="DarkOrange" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
                 <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
             </StackLayout>
+            
+                <StackLayout x:Name="followUserLayout" IsEnabled="True" IsVisible="True" Orientation="Vertical">
 
-            <StackLayout x:Name="searchLayout" IsEnabled="True" IsVisible="True" Orientation="Vertical">
+                    <SearchBar x:Name="followUserBar" Placeholder="Search Username"  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
 
-                <SearchBar x:Name="searchPageBar" Placeholder="Search User"  BackgroundColor="LightSlateGray" SearchButtonPressed="searchButtonPressed"/>
+                    <Label x:Name="instruction" Text="TAP ON USER TO FOLLOW THEM"/>
+                    <Button x:Name="foundFriend" Text="" BorderColor="DarkOrange" BackgroundColor="Transparent" CornerRadius="20" TextColor="Black" IsVisible="False" HorizontalOptions="StartAndExpand" VerticalOptions="Start" Clicked="followUser"/>
 
-                <Button x:Name="searchSuggestions" Text="" BorderColor="DarkOrange" CornerRadius="20" TextColor="Black" IsVisible="False" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Clicked="goToUserAccount"/>
+                </StackLayout>
+
             </StackLayout>
+        </ScrollView>
 
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

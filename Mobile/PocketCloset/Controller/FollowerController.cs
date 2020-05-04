@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PocketCloset.Controller 
 {
-    public class FollowerController : BaseController<FollowViewModel>
+    public class FollowerController : BaseController<Follower>
     {
         public RestAPIService restAPIService;
 

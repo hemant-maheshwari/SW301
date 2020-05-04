@@ -13,12 +13,12 @@
 
             <StackLayout x:Name="activitySpinnerFollowingLayout" IsVisible="False" IsEnabled="False">
                 <ActivityIndicator x:Name="followingLoader" Color="DarkOrange" IsRunning="False" IsEnabled="False" BackgroundColor="Transparent" IsVisible="False"/>
-                <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="24" VerticalTextAlignment="End"/>
+                <Label Text="Please wait..." TextColor="White" Margin="0,60,0,0" HorizontalTextAlignment="Center" FontSize="Title" VerticalTextAlignment="End"/>
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
                 <Image x:Name="LoginIcon" Source="LoginIcon.png" HeightRequest="60"  Margin="0,0,0,0" Grid.Row="0" Grid.Column="0"/>
-                <Label Text="Following"  Margin="12,15,0,0" FontAttributes="Bold" FontSize="Large" TextColor="White" FontFamily="MS Gothic"  />
+                <Label Text="Following"  Margin="12,15,0,0" FontAttributes="Bold" FontSize="Title" TextColor="White" FontFamily="MS Gothic" VerticalOptions="CenterAndExpand"   />
             </StackLayout>
             <StackLayout x:Name="Welcome4" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
                 <BoxView x:Name="boxViewFollowing" WidthRequest ="200" HeightRequest="2"/>

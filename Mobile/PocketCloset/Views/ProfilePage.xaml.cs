@@ -58,8 +58,11 @@ namespace PocketCloset.Views
 
             ProfilePicture profilePicture = await profilePictureController.getModel(user.userId);
             if (profilePicture != null) {
-                string profilePicString = profilePicture.profilePicture;
-                profilePic.Source = getImageSourceFromString(profilePicString);
+                if (profilePicture.profilePicture != " ")
+                {
+                    string profilePicString = profilePicture.profilePicture;
+                    profilePic.Source = getImageSourceFromString(profilePicString);
+                }
             }
 
             List<OutfitViewModel> outfitViewModels = await outfitController.getOutfits(user.userId);
@@ -98,11 +101,12 @@ namespace PocketCloset.Views
         }
         public void goToAccountPage(object sender, EventArgs e)
         {
-            App.Current.MainPage = new AccountPage();
+            App.Current.MainPage = new SettingsPage();
         }
 
         public async void uploadProfilePicture(object sender, EventArgs e)
         {
+            
 
             {
                 if (!CrossMedia.Current.IsPickPhotoSupported)
@@ -124,11 +128,19 @@ namespace PocketCloset.Views
 
                 string proflePictureString = imageToBase64();
                 ProfilePicture profilePicture = new ProfilePicture(user.userId, proflePictureString);
-                await profilePictureController.deleteModel(user.userId);
-                bool flag = await profilePictureController.createModel(profilePicture);
-                if (flag) {
-                    await DisplayAlert("Message","Profile Picture Changed!","Okay");
+                bool flag = await profilePictureController.updateModel(profilePicture);
+                if (flag)
+                {
+                    await DisplayAlert("Message", "Profile Picture Changed!", "Okay");
+                    profilePic.Source = getImageSourceFromString(profilePicture.profilePicture);
                 }
+                /*if (flag) {
+                    flag = await profilePictureController.createModel(profilePicture);
+                    if (flag)
+                    {
+                        await DisplayAlert("Message", "Profile Picture Changed!", "Okay");
+                    }
+                }*/
 
             };
         }

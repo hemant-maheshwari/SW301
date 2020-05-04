@@ -7,6 +7,11 @@ namespace PocketCloset.Models
         {
         }
 
+        public Follower(int followerUserId, int followedUserId)
+        {
+            this.followedUserId = followedUserId;
+            this.followerUserId = followerUserId;
+        }
 
         public int followId { get; set; }
         public int followerUserId { get; set; } //Id of person who is following 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/YS7FQpYYD6/n/QUxAYsk+4rVoL005Bt//s4ZxLYAd7l9ISp9rij+GyqXnKtV36wSZQgSGLRCCoVqmUhDU3WAA==",
+  "dgSpecHash": "qg3aEVKQ8sp+GIi46ma67nelfvMxGjCR3PRPBEm0mFuKvM8enmjZUSV+Z7txTJZHv1kIpM1xVJfexkowHg8LUQ==",
   "success": true,
-  "projectFilePath": "C:\\Xamarin\\PocketCloset\\SW301\\WebAPI\\PocketClosetWebServiceAPI\\PocketClosetWebServiceAPI\\PocketClosetWebServiceAPI.csproj",
+  "projectFilePath": "C:\\Xamarin\\PocketCloset1\\SW301\\WebAPI\\PocketClosetWebServiceAPI\\PocketClosetWebServiceAPI\\PocketClosetWebServiceAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Banso\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Banso\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",

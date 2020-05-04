@@ -7,32 +7,49 @@
              x:Class="PocketCloset.Views.AccountPage" >
     <ContentPage.Content>
         <StackLayout x:Name="MasterLayout">
-            <StackLayout  x:Name="LogoStack" VerticalOptions="FillAndExpand" Orientation="Horizontal">
-                <Image x:Name="loginIcon"  HeightRequest="40" Source="LoginIcon.png" Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand"/>
-                <Label Text="Account"  Margin="0,0,0,0" FontAttributes="Bold" FontSize="40" TextColor="White" FontFamily="MS Gothic" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness" >
+                    <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
+                    <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
+                </OnIdiom>
+            </StackLayout.Padding>
+
+            <Label x:Name="lblUsername" Text="Username" HorizontalTextAlignment="Center" Margin="0,15,0,0" FontSize="25" TextColor="White"/>
+            <StackLayout x:Name="ProfileNumbers" Orientation="Horizontal" HorizontalOptions="Center">
             </StackLayout>
-            <StackLayout VerticalOptions="StartAndExpand">
-                <StackLayout.Padding>
-                    <OnIdiom x:TypeArguments="Thickness" >
-                        <OnIdiom.Phone>40,0,40,0</OnIdiom.Phone>
-                        <OnIdiom.Tablet>140,150,140,0</OnIdiom.Tablet>
-                    </OnIdiom>
-                </StackLayout.Padding>
-                <StackLayout x:Name="Welcome4" Margin="0,0,0,5" Grid.Row="0" Grid.Column="0">
-                    <BoxView x:Name="boxViewAccountPage" WidthRequest ="200" HeightRequest="2"/>
-                    <Label Text="Edit your account information" TextColor="White" FontSize="15" />
-                </StackLayout>
-                <StackLayout Margin="0,30,0,0">
-                    <Entry x:Name="entryAccFirstName" Placeholder="First Name" TextColor="White" PlaceholderColor="LightGray"/>
-                    <Entry x:Name="entryAccLastName" Placeholder="Last Name" TextColor="White" PlaceholderColor="LightGray"/>
-                    <Entry x:Name="entryAccEmail" Placeholder="Email" TextColor="White" PlaceholderColor="LightGray" Keyboard="Email"/>
-                    <Entry x:Name="entryAccPhone" Placeholder="Phone" TextColor="White" PlaceholderColor="LightGray" Keyboard="Telephone"/>
-                    <Entry x:Name="entryAccPassword" Placeholder="Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
-                    <Entry x:Name="entryAccConfirmPassword" Placeholder="Confirm Password" TextColor="White" PlaceholderColor="LightGray" IsPassword="True"/>
-                </StackLayout>
-                <StackLayout Margin="0,40">
-                    <Button x:Name="btnUpdateAccInfo" CornerRadius="5" BackgroundColor="DarkOrange" Text="Update Information" TextColor="White" HorizontalOptions="Center"/>
-                </StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="30"  HorizontalOptions="CenterAndExpand">
+                <ImageButton x:Name="profilePic" Clicked="uploadProfilePicture" Aspect="AspectFit" BackgroundColor="Transparent"  Source="profileIcon.png" WidthRequest="100" HeightRequest="100" Margin="10,0,-10,0"/>
+                <Grid ColumnSpacing="25" >
+                    <Label x:Name="lblPostsCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="lblFollowersCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="1"/>
+                    <Label x:Name="lblFollowingCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="2"/>
+                    <Label x:Name="lblPosts" Text="POSTS" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="Caption" Margin="0,15,0,0" Grid.Row="1" Grid.Column="0"/>
+                    <Button x:Name="btnFollowers" Text="Follower" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="1" Margin="-40,0,0,35" Clicked="goToFollowersPage"/>
+                    <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="2" Margin="-40,0,0,35" Clicked="goToFollowingPage"/>
+                </Grid>
+            </StackLayout>
+            <StackLayout Margin="40, -10, 0 ,0">
+                <Label x:Name="lblname" Text="Full Name" TextColor="White" FontAttributes="Bold"/>
+            </StackLayout>
+            <StackLayout>
+                <Button x:Name="btnEditProfile" Text="Edit Profile" Margin="30,0" Clicked="goToAccountPage"/>
+            </StackLayout>
+            <StackLayout>
+                <Grid x:Name="pictureGrid" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Margin="40,30" ColumnSpacing="5" RowSpacing="15">
+                    <Image x:Name="pic1Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="0"/>
+                    <Image x:Name="pic1Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="0"/>
+                    <Image x:Name="pic2Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="1"/>
+                    <Image x:Name="pic2Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="1"/>
+                    <Image x:Name="pic3Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="0" Grid.Column="2"/>
+                    <Image x:Name="pic3Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="1" Grid.Column="2"/>
+                    <Image x:Name="pic4Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="0"/>
+                    <Image x:Name="pic4Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="0"/>
+                    <Image x:Name="pic5Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="1"/>
+                    <Image x:Name="pic5Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="1"/>
+                    <Image x:Name="pic6Shirt" Aspect="AspectFit" Source="shirt.png" WidthRequest="100" HeightRequest="100" Grid.Row="2" Grid.Column="2"/>
+                    <Image x:Name="pic6Pant" Aspect="AspectFit" Source="pant.png" WidthRequest="100" HeightRequest="100" Grid.Row="3" Grid.Column="2"/>
+
+                </Grid>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
