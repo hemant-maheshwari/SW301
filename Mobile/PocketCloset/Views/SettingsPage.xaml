@@ -38,7 +38,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Margin="0,40">
-                    <Button x:Name="btnUpdateAccInfo" CornerRadius="5" Text="Update Information" TextColor="White" HorizontalOptions="Center" Clicked="updateUserForm"/>
+                    <Button x:Name="btnUpdateAccInfo" CornerRadius="5" Text="Update Information" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Clicked="updateUserForm" Margin="75,0,75,0"/>
                     <Button x:Name="btnLogOut" CornerRadius="5" Text="LOG OUT" TextColor="White" HorizontalOptions="Center" Clicked="logOut"/>
                 </StackLayout>
             </StackLayout>

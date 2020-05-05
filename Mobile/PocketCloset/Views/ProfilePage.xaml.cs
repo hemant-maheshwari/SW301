@@ -67,16 +67,22 @@ namespace PocketCloset.Views
 
             List<OutfitViewModel> outfitViewModels = await outfitController.getOutfits(user.userId);
 
+            Image[] clothImageHolder = { pic1Shirt, pic1Pant, pic2Shirt, pic2Pant, pic3Shirt, pic3Pant, pic4Shirt, pic4Pant, pic5Shirt, pic5Pant, pic6Shirt, pic6Pant };
+
             for (int i = 0; i < outfitViewModels.Count; i = i + 2)
             {
                 string shirtString = outfitViewModels[i].clothPicString;
                 string pantString = outfitViewModels[i + 1].clothPicString;
-                pic1Shirt.Source = getImageSourceFromString(shirtString);
-                pic1Pant.Source = getImageSourceFromString(pantString);
+
+                clothImageHolder[i].Source = getImageSourceFromString(shirtString);
+                clothImageHolder[i + 1].Source = getImageSourceFromString(pantString);
+
+
             }
 
 
-          
+
+
             int outfitCount = outfitViewModels.Count() / 2;
 
             lblPostsCount.Text = outfitCount.ToString();

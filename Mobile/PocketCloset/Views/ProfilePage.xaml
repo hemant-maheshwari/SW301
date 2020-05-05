@@ -27,7 +27,7 @@
                     <Label x:Name="lblPostsCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Center" Grid.Row="0" Grid.Column="0"/>
                     <Label x:Name="lblFollowersCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="1"/>
                     <Label x:Name="lblFollowingCount" Text="-" TextColor="White" FontAttributes="Bold" VerticalTextAlignment="End" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="2"/>
-                    <Label x:Name="lblPosts" Text="POSTS" TextColor="White" VerticalTextAlignment="Start" HorizontalTextAlignment="Center" FontSize="Caption" Margin="0,15,0,0" Grid.Row="1" Grid.Column="0"/>
+                    <Button x:Name="lblPosts"  Text="Outfits" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="0" Margin="-10,0,0,35"/>
                     <Button x:Name="btnFollowers" Text="Follower" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="1" Margin="-40,0,0,35" Clicked="goToFollowersPage"/>
                     <Button x:Name="btnFollowing" Text="Following" TextColor="White" BackgroundColor="Transparent" FontSize="11" Grid.Row="1" Grid.Column="2" Margin="-40,0,0,35" Clicked="goToFollowingPage"/>
                 </Grid>
