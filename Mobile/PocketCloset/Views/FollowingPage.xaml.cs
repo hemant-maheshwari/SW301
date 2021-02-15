@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PocketCloset.Models;
 
 using Xamarin.Forms;
@@ -11,19 +8,18 @@ using Xamarin.Forms.Xaml;
 namespace PocketCloset.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AccountPage : ContentPage
+    public partial class FollowingPage : ContentPage
     {
-        public AccountPage()
+        public FollowingPage()
         {
             InitializeComponent();
             Init();
         }
-
-        void Init()
+        public void Init()
         {
             BackgroundColor = Constants.backgroundColor;
-            boxViewAccountPage.Color = Constants.logoColor;
-
+            LoginIcon.HeightRequest = Constants.LoginIconHeight;
+            boxViewFollowing.Color = Constants.logoColor;
         }
     }
 }
